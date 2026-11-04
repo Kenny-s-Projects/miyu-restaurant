@@ -9,6 +9,8 @@ const page = await readFile(new URL("./public/index.html", import.meta.url))
 const pageGz = gzipSync(page, { level: 9 })
 const pageBr = brotliCompressSync(page)
 
+const ASSET_TYPES = { jpg: "image/jpeg", jpeg: "image/jpeg", webp: "image/webp", png: "image/png", svg: "image/svg+xml" }
+
 const SECURITY_HEADERS = {
   "X-Content-Type-Options": "nosniff",
   "Referrer-Policy": "strict-origin-when-cross-origin",
@@ -50,6 +52,24 @@ const server = createServer(async (req, res) => {
   }
 
   if (url.pathname === "/healthz") return sendJson(res, 200, { ok: true })
+
+  // Images du site (public/assets) : noms simples uniquement, pas de sous-dossier.
+  const asset = /^\/assets\/([a-z0-9][a-z0-9._-]{0,80}\.(?:jpe?g|webp|png|svg))$/i.exec(url.pathname)
+  if (asset && (req.method === "GET" || req.method === "HEAD")) {
+    try {
+      const data = await readFile(new URL(`./public/assets/${asset[1]}`, import.meta.url))
+      const ext = asset[1].split(".").pop().toLowerCase()
+      res.writeHead(200, {
+        "Content-Type": ASSET_TYPES[ext] || "application/octet-stream",
+        "Cache-Control": "public, max-age=86400",
+        ...SECURITY_HEADERS,
+      })
+      return res.end(req.method === "HEAD" ? undefined : data)
+    } catch {
+      res.writeHead(404, { "Content-Type": "text/plain; charset=utf-8" })
+      return res.end("Introuvable")
+    }
+  }
 
   if (req.method !== "GET" && req.method !== "HEAD") {
     res.writeHead(405, { Allow: "GET, HEAD" }); return res.end()

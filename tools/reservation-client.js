@@ -17,7 +17,12 @@
   var CSS =
     "#miyu-resa{position:fixed;inset:0;z-index:100001;display:none;align-items:center;justify-content:center;padding:16px;" +
     "background:rgba(1,20,23,.72);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}" +
-    "#miyu-resa.open{display:flex}" +
+    "#miyu-resa.open{display:flex;animation:mrFade .3s ease both}" +
+    "#miyu-resa.open .box{animation:mrPop .45s cubic-bezier(.2,.8,.2,1) both}" +
+    "#miyu-resa.sent .done{animation:mrPop .45s cubic-bezier(.2,.8,.2,1) both}" +
+    "@keyframes mrFade{from{opacity:0}to{opacity:1}}" +
+    "@keyframes mrPop{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:none}}" +
+    "@media (prefers-reduced-motion:reduce){#miyu-resa.open,#miyu-resa.open .box,#miyu-resa.sent .done{animation:none}}" +
     "#miyu-resa .box{position:relative;width:100%;max-width:620px;max-height:calc(100vh - 32px);overflow:auto;background:#f4ecdd;color:#022d33;" +
     "border-radius:22px;box-shadow:0 30px 70px rgba(0,0,0,.45);font-family:Jost,'Segoe UI',sans-serif}" +
     "#miyu-resa .head{padding:28px 30px 8px;background:#022d33;color:#f4ecdd;border-radius:22px 22px 0 0}" +
@@ -80,7 +85,8 @@
     dlg.querySelector(".x").addEventListener("click", close);
     dlg.querySelector(".ok").addEventListener("click", close);
     dlg.addEventListener("mousedown", function (e) { if (e.target === dlg) close(); });
-    dlg.addEventListener("keydown", function (e) {
+    document.addEventListener("keydown", function (e) {
+      if (!dlg.classList.contains("open")) return;
       if (e.key === "Escape") { e.preventDefault(); close(); }
       if (e.key === "Tab") trap(e);
     });

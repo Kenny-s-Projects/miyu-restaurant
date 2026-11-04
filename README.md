@@ -5,9 +5,12 @@ est envoyée par e-mail à MIYU (Resend) et, si configuré, sur WhatsApp au gér
 
 ## Fonctionnement
 
-- `public/index.html` : la page du site, exportée depuis le design (canevas Claude) puis complétée
-  par `tools/reservation-client.js` (envoi du formulaire de réservation).
-- `server.mjs` : petit serveur Node sans dépendance. Sert la page et reçoit `POST /api/reservation`.
+- `design/Main.dc.html` : source de la page, copiée depuis le canevas de design (Claude).
+- `design/assets/` : les images du site ; `index.json` relie chaque identifiant d'image du canevas à son fichier.
+- `tools/build.py` : assemble `public/index.html` (moteur de rendu + polices venant de `tools/export-cache.html`,
+  contenu venant de `design/`) et copie les images dans `public/assets/`.
+- `tools/reservation-client.js` : la fenêtre de réservation, ajoutée à la page par le build.
+- `server.mjs` : petit serveur Node sans dépendance. Sert la page, les images et `POST /api/reservation`.
 - `lib/reservation.mjs` : vérifie la demande et l'envoie par e-mail (Resend) et/ou WhatsApp (API Cloud de Meta).
 
 ## Variables d'environnement (Render › Environment)
@@ -30,9 +33,10 @@ a écrit au numéro WhatsApp Business dans les 24 dernières heures (pratique po
 
 ## Mettre à jour le design
 
-1. Modifier le design dans le canevas, puis « Send to Netlify » (site d'aperçu).
-2. `python3 -I tools/build.py` pour régénérer `public/index.html` depuis l'aperçu.
-3. Commit + push : Render redéploie automatiquement.
+1. Copier la nouvelle version du canevas dans `design/Main.dc.html` (et les nouvelles images dans `design/assets/`,
+   avec leur identifiant dans `index.json`).
+2. `python3 -I tools/build.py`
+3. Commit + push sur `main` : Render redéploie automatiquement.
 
 ## Commandes
 
