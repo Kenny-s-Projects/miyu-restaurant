@@ -5,9 +5,12 @@ import { gzipSync, brotliCompressSync } from "node:zlib"
 import { handleReservation } from "./lib/reservation.mjs"
 
 const PORT = Number(process.env.PORT) || 10000
-const page = await readFile(new URL("./public/index.html", import.meta.url))
-const pageGz = gzipSync(page, { level: 9 })
-const pageBr = brotliCompressSync(page)
+// Pages : français (/) et anglais (/en/), compressées une fois au démarrage.
+async function loadPage(file) {
+  const raw = await readFile(new URL(file, import.meta.url))
+  return { raw, gz: gzipSync(raw, { level: 9 }), br: brotliCompressSync(raw) }
+}
+const PAGES = { "/": await loadPage("./public/index.html"), "/en/": await loadPage("./public/en/index.html") }
 
 const ASSET_TYPES = { jpg: "image/jpeg", jpeg: "image/jpeg", webp: "image/webp", png: "image/png", svg: "image/svg+xml" }
 
@@ -74,13 +77,19 @@ const server = createServer(async (req, res) => {
   if (req.method !== "GET" && req.method !== "HEAD") {
     res.writeHead(405, { Allow: "GET, HEAD" }); return res.end()
   }
-  if (url.pathname !== "/" && url.pathname !== "/index.html") {
-    res.writeHead(302, { Location: "/" }); return res.end()
+  if (url.pathname === "/en" || url.pathname === "/en/index.html") {
+    res.writeHead(301, { Location: "/en/" }); return res.end()
   }
+  const key = url.pathname === "/" || url.pathname === "/index.html" ? "/" : url.pathname === "/en/" ? "/en/" : null
+  if (!key) {
+    res.writeHead(302, { Location: url.pathname.startsWith("/en/") ? "/en/" : "/" }); return res.end()
+  }
+  const page = PAGES[key]
   const accept = String(req.headers["accept-encoding"] || "")
-  const [buf, enc] = /\bbr\b/.test(accept) ? [pageBr, "br"] : /\bgzip\b/.test(accept) ? [pageGz, "gzip"] : [page, null]
+  const [buf, enc] = /\bbr\b/.test(accept) ? [page.br, "br"] : /\bgzip\b/.test(accept) ? [page.gz, "gzip"] : [page.raw, null]
   res.writeHead(200, {
     "Content-Type": "text/html; charset=utf-8",
+    "Content-Language": key === "/en/" ? "en" : "fr",
     "Cache-Control": "public, max-age=300",
     Vary: "Accept-Encoding",
     ...(enc ? { "Content-Encoding": enc } : {}),

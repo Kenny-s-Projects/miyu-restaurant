@@ -5,7 +5,9 @@ est envoyée par e-mail à MIYU (Resend) et, si configuré, sur WhatsApp au gér
 
 ## Fonctionnement
 
-- `design/Main.dc.html` : source de la page, copiée depuis le canevas de design (Claude).
+- `design/Main.dc.html` : source de la page (français), copiée depuis le canevas de design (Claude).
+- `design/i18n/en.json` : traductions anglaises. Le build crée la version anglaise (`/en/`) et `design/Main.en.dc.html`.
+  S'il manque une traduction, le build s'arrête et liste les textes à ajouter.
 - `design/assets/` : les images du site ; `index.json` relie chaque identifiant d'image du canevas à son fichier.
 - `tools/build.py` : assemble `public/index.html` (moteur de rendu + polices venant de `tools/export-cache.html`,
   contenu venant de `design/`) et copie les images dans `public/assets/`.
@@ -26,7 +28,8 @@ est envoyée par e-mail à MIYU (Resend) et, si configuré, sur WhatsApp au gér
 | `WHATSAPP_TEMPLATE` | (production) nom du modèle approuvé, ex. `nouvelle_reservation` |
 | `WHATSAPP_TEMPLATE_LANG` | (optionnel) langue du modèle, défaut `fr` |
 
-Chaque canal n'est actif que si ses variables sont renseignées.
+Chaque canal n'est actif que si ses variables sont renseignées. Le client reçoit aussi un e-mail de confirmation
+(dans sa langue), avec MIYU en adresse de réponse.
 
 WhatsApp : sans modèle, le message part en texte libre : cela ne fonctionne que si le destinataire
 a écrit au numéro WhatsApp Business dans les 24 dernières heures (pratique pour les tests).

@@ -1,17 +1,63 @@
-/* MIYU — fenêtre de réservation.
-   Injecté dans la page exportée du design. Tout clic sur un bouton ou un lien « Réserver… »
+/* MIYU — fenêtre de réservation (français / anglais).
+   Injecté dans la page construite. Tout clic sur un bouton ou un lien « Réserver… » / « Book… »
    ouvre une fenêtre avec le formulaire complet, envoyé à /api/reservation. */
 (function () {
   "use strict";
+  var LANG = (document.documentElement.lang || "").slice(0, 2) === "en" || /^\/en(\/|$)/.test(location.pathname) ? "en" : "fr";
   var HEURES = ["12:00", "12:30", "13:00", "13:30", "14:00", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30"];
   var PERSONNES = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "12", "15", "20+"];
-  var ESPACES = ["Restaurant", "Lounge bar", "Rooftop"];
+  var ESPACES = ["Restaurant", "Salon privé"]; // valeurs envoyées au serveur
   var PHONE = "+242 05 773 9999";
+  var T = {
+    fr: {
+      title: "Réserver une table", kicker: "MIYU · Pointe-Noire", close: "Fermer",
+      nom: "Nom", tel: "Téléphone (WhatsApp)", email: "E-mail", emailHint: "(pour la confirmation)",
+      date: "Date", heure: "Heure", pers: "Personnes", espace: "Espace", espaces: ["Restaurant", "Salon privé"],
+      msg: "Demande particulière", opt: "(facultatif)", msgPh: "Anniversaire, allergie, table près de la fenêtre…",
+      send: "Envoyer la demande", sending: "Envoi en cours…",
+      note: "Vous recevez une confirmation par e-mail. Notre équipe vous confirme la table par WhatsApp ou par téléphone.",
+      thanks: "Merci !",
+      done: function (d) {
+        return "Votre demande pour " + (d.personnes === "1" ? "1 personne" : d.personnes + " personnes") + ", le " +
+          d.date.split("-").reverse().join("/") + " à " + d.heure + " (" + d.espaceLabel + "), est bien reçue. " +
+          "Une confirmation vient de vous être envoyée à " + d.email + ".";
+      },
+      eNom: "Merci d'indiquer votre nom.", eTel: "Merci d'indiquer un numéro de téléphone valide.",
+      eEmailReq: "Merci d'indiquer votre e-mail pour recevoir la confirmation.", eEmail: "L'adresse e-mail n'est pas valide.",
+      eDate: "Merci de choisir une date.", ePast: "La date choisie est déjà passée.",
+      eSend: "La demande n'a pas pu être envoyée. Appelez-nous au " + PHONE + ".",
+      eNet: "Connexion impossible. Réessayez ou appelez-nous au " + PHONE + ".",
+      bar: "Réserver"
+    },
+    en: {
+      title: "Book a table", kicker: "MIYU · Pointe-Noire", close: "Close",
+      nom: "Name", tel: "Phone (WhatsApp)", email: "Email", emailHint: "(for your confirmation)",
+      date: "Date", heure: "Time", pers: "Guests", espace: "Area", espaces: ["Restaurant", "Private lounge"],
+      msg: "Special request", opt: "(optional)", msgPh: "Birthday, allergy, table by the window…",
+      send: "Send request", sending: "Sending…",
+      note: "You will receive a confirmation by email. Our team will confirm your table by WhatsApp or phone.",
+      thanks: "Thank you!",
+      done: function (d) {
+        return "Your request for " + (d.personnes === "1" ? "1 guest" : d.personnes + " guests") + " on " +
+          d.date.split("-").reverse().join("/") + " at " + d.heure + " (" + d.espaceLabel + ") has been received. " +
+          "A confirmation has just been sent to " + d.email + ".";
+      },
+      eNom: "Please enter your name.", eTel: "Please enter a valid phone number.",
+      eEmailReq: "Please enter your email to receive the confirmation.", eEmail: "This email address is not valid.",
+      eDate: "Please choose a date.", ePast: "The selected date has already passed.",
+      eSend: "Your request could not be sent. Please call us on " + PHONE + ".",
+      eNet: "Connection failed. Please try again or call us on " + PHONE + ".",
+      bar: "Book"
+    }
+  }[LANG];
   var dlg, form, lastFocus, busy = false;
 
   function today() { return new Date(Date.now() + 3600e3).toISOString().slice(0, 10); }
-  function opts(list, sel) {
-    return list.map(function (v) { return '<option' + (v === sel ? " selected" : "") + ">" + v + "</option>"; }).join("");
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function opts(values, sel, labels) {
+    return values.map(function (v, i) {
+      return '<option value="' + esc(v) + '"' + (v === sel ? " selected" : "") + ">" + esc(labels ? labels[i] : v) + "</option>";
+    }).join("");
   }
 
   var CSS =
@@ -47,7 +93,7 @@
     "#miyu-resa .note{margin:0;font-size:12px;color:#5b6d6e;text-align:center}" +
     "#miyu-resa .done{padding:34px 30px 36px;text-align:center;display:none}" +
     "#miyu-resa .done h3{margin:0 0 10px;font-family:'Cormorant Garamond',Georgia,serif;font-size:32px;font-weight:600}" +
-    "#miyu-resa .done p{margin:0 auto 22px;max-width:420px;font-size:16px;line-height:1.6;color:#3e5a5d}" +
+    "#miyu-resa .done p{margin:0 auto 22px;max-width:440px;font-size:16px;line-height:1.6;color:#3e5a5d}" +
     "#miyu-resa.sent form{display:none}#miyu-resa.sent .done{display:block}" +
     "@media (max-width:560px){#miyu-resa form{grid-template-columns:1fr;padding:20px}#miyu-resa .head{padding:24px 20px 6px}#miyu-resa h2{font-size:28px}}";
 
@@ -60,25 +106,25 @@
     dlg.id = "miyu-resa";
     dlg.innerHTML =
       '<div class="box" role="dialog" aria-modal="true" aria-labelledby="mr-title">' +
-      '<button type="button" class="x" aria-label="Fermer">&times;</button>' +
-      '<div class="head"><p class="kicker">MIYU · Pointe-Noire</p><h2 id="mr-title">Réserver une table</h2></div>' +
-      '<form novalidate>' +
-      '<div class="f"><label for="mr-nom">Nom</label><input id="mr-nom" name="nom" autocomplete="name" required maxlength="60"></div>' +
-      '<div class="f"><label for="mr-tel">Téléphone (WhatsApp)</label><input id="mr-tel" name="tel" type="tel" autocomplete="tel" placeholder="+242 …" required maxlength="25"></div>' +
-      '<div class="f full"><label for="mr-email">E-mail <span class="opt">(facultatif)</span></label><input id="mr-email" name="email" type="email" autocomplete="email" maxlength="120"></div>' +
-      '<div class="f"><label for="mr-date">Date</label><input id="mr-date" name="date" type="date" required></div>' +
-      '<div class="f"><label for="mr-heure">Heure</label><select id="mr-heure" name="heure">' + opts(HEURES, "20:00") + "</select></div>" +
-      '<div class="f"><label for="mr-pers">Personnes</label><select id="mr-pers" name="personnes">' + opts(PERSONNES, "2") + "</select></div>" +
-      '<div class="f"><label for="mr-espace">Espace</label><select id="mr-espace" name="espace">' + opts(ESPACES, "Restaurant") + "</select></div>" +
-      '<div class="f full"><label for="mr-msg">Demande particulière <span class="opt">(facultatif)</span></label>' +
-      '<textarea id="mr-msg" name="message" maxlength="500" placeholder="Anniversaire, allergie, table près de la fenêtre…"></textarea></div>' +
+      '<button type="button" class="x" aria-label="' + T.close + '">&times;</button>' +
+      '<div class="head"><p class="kicker">' + T.kicker + '</p><h2 id="mr-title">' + T.title + "</h2></div>" +
+      "<form novalidate>" +
+      '<div class="f"><label for="mr-nom">' + T.nom + '</label><input id="mr-nom" name="nom" autocomplete="name" required maxlength="60"></div>' +
+      '<div class="f"><label for="mr-tel">' + T.tel + '</label><input id="mr-tel" name="tel" type="tel" autocomplete="tel" placeholder="+242 …" required maxlength="25"></div>' +
+      '<div class="f full"><label for="mr-email">' + T.email + ' <span class="opt">' + T.emailHint + '</span></label><input id="mr-email" name="email" type="email" autocomplete="email" required maxlength="120"></div>' +
+      '<div class="f"><label for="mr-date">' + T.date + '</label><input id="mr-date" name="date" type="date" required></div>' +
+      '<div class="f"><label for="mr-heure">' + T.heure + '</label><select id="mr-heure" name="heure">' + opts(HEURES, "20:00") + "</select></div>" +
+      '<div class="f"><label for="mr-pers">' + T.pers + '</label><select id="mr-pers" name="personnes">' + opts(PERSONNES, "2") + "</select></div>" +
+      '<div class="f"><label for="mr-espace">' + T.espace + '</label><select id="mr-espace" name="espace">' + opts(ESPACES, "Restaurant", T.espaces) + "</select></div>" +
+      '<div class="f full"><label for="mr-msg">' + T.msg + ' <span class="opt">' + T.opt + "</span></label>" +
+      '<textarea id="mr-msg" name="message" maxlength="500" placeholder="' + T.msgPh + '"></textarea></div>' +
       '<div class="hp" aria-hidden="true"><label for="mr-site">Site</label><input id="mr-site" name="site" tabindex="-1" autocomplete="off"></div>' +
       '<p class="msg full" role="alert"></p>' +
-      '<button type="submit" class="send full">Envoyer la demande</button>' +
-      '<p class="note full">Votre table est confirmée par notre équipe, par WhatsApp ou par téléphone.</p>' +
+      '<button type="submit" class="send full">' + T.send + "</button>" +
+      '<p class="note full">' + T.note + "</p>" +
       "</form>" +
-      '<div class="done" role="status"><h3>Merci !</h3><p class="done-text"></p>' +
-      '<button type="button" class="send ok" style="padding:0 34px">Fermer</button></div>' +
+      '<div class="done" role="status"><h3>' + T.thanks + '</h3><p class="done-text"></p>' +
+      '<button type="button" class="send ok" style="padding:0 34px">' + T.close + "</button></div>" +
       "</div>";
     document.body.appendChild(dlg);
     form = dlg.querySelector("form");
@@ -146,56 +192,56 @@
     var d = form.elements;
     var data = {
       nom: d.nom.value.trim(), tel: d.tel.value.trim(), email: d.email.value.trim(), date: d.date.value,
-      heure: d.heure.value, personnes: d.personnes.value, espace: d.espace.value, message: d.message.value.trim(), site: d.site.value
+      heure: d.heure.value, personnes: d.personnes.value, espace: d.espace.value, message: d.message.value.trim(),
+      site: d.site.value, lang: LANG
     };
     var bad = null;
-    if (data.nom.length < 2) bad = ["nom", "Merci d'indiquer votre nom."];
-    else if (data.tel.replace(/\D/g, "").length < 8) bad = ["tel", "Merci d'indiquer un numéro de téléphone valide."];
-    else if (data.email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(data.email)) bad = ["email", "L'adresse e-mail n'est pas valide."];
-    else if (!data.date) bad = ["date", "Merci de choisir une date."];
-    else if (data.date < today()) bad = ["date", "La date choisie est déjà passée."];
+    if (data.nom.length < 2) bad = ["nom", T.eNom];
+    else if (data.tel.replace(/\D/g, "").length < 8) bad = ["tel", T.eTel];
+    else if (!data.email) bad = ["email", T.eEmailReq];
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(data.email)) bad = ["email", T.eEmail];
+    else if (!data.date) bad = ["date", T.eDate];
+    else if (data.date < today()) bad = ["date", T.ePast];
     if (bad) { setMsg(bad[1], true); d[bad[0]].focus(); return; }
 
     busy = true;
     var btn = dlg.querySelector(".send");
-    btn.disabled = true; btn.textContent = "Envoi en cours…"; setMsg("");
+    btn.disabled = true; btn.textContent = T.sending; setMsg("");
     fetch("/api/reservation", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) })
       .then(function (r) { return r.json().catch(function () { return { ok: false }; }); })
       .then(function (res) {
         if (res && res.ok) {
-          dlg.querySelector(".done-text").textContent =
-            "Votre demande pour " + (data.personnes === "1" ? "1 personne" : data.personnes + " personnes") +
-            ", le " + data.date.split("-").reverse().join("/") + " à " + data.heure +
-            " (" + data.espace + "), est bien reçue. Notre équipe vous confirme la table très vite.";
+          data.espaceLabel = T.espaces[ESPACES.indexOf(data.espace)] || data.espace;
+          dlg.querySelector(".done-text").textContent = T.done(data);
           dlg.classList.add("sent");
           dlg.querySelector(".ok").focus();
           d.message.value = "";
         } else {
-          setMsg((res && res.error) || "La demande n'a pas pu être envoyée. Appelez-nous au " + PHONE + ".", true);
+          setMsg((res && res.error) || T.eSend, true);
         }
       })
-      .catch(function () { setMsg("Connexion impossible. Réessayez ou appelez-nous au " + PHONE + ".", true); })
-      .then(function () { busy = false; btn.disabled = false; btn.textContent = "Envoyer la demande"; });
+      .catch(function () { setMsg(T.eNet, true); })
+      .then(function () { busy = false; btn.disabled = false; btn.textContent = T.send; });
   }
 
-  // Ouvre la fenêtre depuis tout bouton ou lien « Réserver… » (en-tête, accueil, contact, lounge…).
+  // Ouvre la fenêtre depuis tout bouton ou lien « Réserver… » / « Book… ».
   document.addEventListener("click", function (e) {
     var t = e.target && e.target.closest ? e.target.closest("[data-resa], a, button") : null;
     if (!t || (dlg && dlg.contains(t))) return;
     var label = (t.textContent || "").replace(/\s+/g, " ").trim();
     var isBar = t.hasAttribute("data-resa") || (t.tagName === "BUTTON" && !!t.closest("#reserver, #contact-reserver"));
-    if (!isBar && !/^r[ée]server\b/i.test(label)) return;
+    if (!isBar && !/^(r[ée]server|book)\b/i.test(label)) return;
     e.preventDefault();
     e.stopPropagation();
     var px = t.getAttribute("data-resa") || (t.closest("#contact-reserver") ? "c" : "r");
     open(isBar ? readBar(px) : null);
   }, true);
 
-  // Le bouton de la barre de réservation affiche « Réserver ».
+  // Le bouton de la barre de réservation affiche « Réserver » / « Book ».
   function relabel() {
     ["#reserver", "#contact-reserver"].forEach(function (s) {
       var b = document.querySelector(s + " button");
-      if (b && /^v[ée]rifier$/i.test(b.textContent.trim())) b.textContent = "Réserver";
+      if (b && /^(v[ée]rifier|check)$/i.test(b.textContent.trim())) b.textContent = T.bar;
     });
   }
   var pending = false;

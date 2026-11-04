@@ -1,0 +1,793 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>MIYU — Home</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&amp;family=Jost:wght@300;400;500;600&amp;family=Allura&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#022d33}
+a{color:#efc688;text-decoration:none}a:hover{color:#fff1d6}
+.gold{background:linear-gradient(100deg,#f6d9a4 0%,#efc688 35%,#b98a52 70%,#e8bf80 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.arches{background-color:#022d33;background-image:radial-gradient(circle at 50% 100%,transparent 27px,rgba(239,198,136,.07) 28px,rgba(239,198,136,.07) 29px,transparent 30px),radial-gradient(circle at 50% 100%,transparent 17px,rgba(239,198,136,.05) 18px,rgba(239,198,136,.05) 19px,transparent 20px);background-size:60px 30px}
+.btn-gold{background:linear-gradient(100deg,#f3d39c,#efc688 45%,#c39457);color:#022d33}
+.btn-gold:hover{filter:brightness(1.07);color:#022d33}
+.chip:hover{background:rgba(239,198,136,.14)}
+input,select{font-family:Jost,'Avenir Next',sans-serif}
+input:focus,select:focus{outline:2px solid #efc688;outline-offset:2px}
+@keyframes lrReveal{from{clip-path:inset(0 0 100% 0);transform:scale(1.04)}to{clip-path:inset(0 0 0 0);transform:scale(1)}}
+@keyframes lrUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+@keyframes lrLine{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes lrGlow{0%,100%{opacity:.55}50%{opacity:.9}}
+.lr-reveal{animation:lrReveal 1.4s cubic-bezier(.7,0,.2,1) both}
+.lr-up{animation:lrUp .9s cubic-bezier(.2,.7,.2,1) both}
+.lr-d1{animation-delay:.55s}.lr-d2{animation-delay:.75s}.lr-d3{animation-delay:.95s}.lr-d4{animation-delay:1.15s}
+.lr-line{transform-origin:left;animation:lrLine 1.1s .9s cubic-bezier(.2,.7,.2,1) both}
+.lr-glow{animation:lrGlow 6s ease-in-out infinite}
+.lr-dot:hover{background:rgba(239,198,136,.75)!important}
+@keyframes pgIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes hdIn{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:none}}
+@keyframes archIn{from{opacity:0;transform:translateY(40px) scale(.97)}to{opacity:1;transform:none}}
+@keyframes rvIn{from{opacity:0;transform:translateY(36px)}to{opacity:1;transform:none}}
+.pg-in{animation:pgIn .6s ease-out both}
+.hd-in{animation:hdIn .8s cubic-bezier(.2,.7,.2,1) both}
+.arch-in{animation:archIn 1.2s .35s cubic-bezier(.2,.7,.2,1) both}
+.arch-in2{animation:archIn 1.2s .6s cubic-bezier(.2,.7,.2,1) both}
+.lift{transition:transform .35s ease,box-shadow .35s ease}
+.lift:hover{transform:translateY(-6px);box-shadow:0 22px 44px rgba(0,0,0,.35)}
+.zoom img{transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.zoom:hover img{transform:scale(1.06)}
+@supports (animation-timeline: view()){.rv{animation:rvIn linear both;animation-timeline:view();animation-range:entry 0% cover 25%}}
+@media (prefers-reduced-motion:reduce){.lr-reveal,.lr-up,.lr-line,.lr-glow,.pg-in,.hd-in,.arch-in,.arch-in2,.rv{animation:none}.lift,.zoom img{transition:none}}
+</style>
+</helmet>
+
+<div style="font-family: Jost, 'Avenir Next', 'Segoe UI', sans-serif; color: #e9e2d4; background: #022d33; width: 100%; overflow: hidden">
+
+<!-- EN-TÊTE -->
+<header id="top" class="hd-in" style="position: relative; z-index: 2; border-bottom: 1px solid rgba(239,198,136,0.18)">
+<div style="max-width: 1240px; margin: 0 auto; padding: 18px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px">
+<a href="#top" onClick="{{ goHome }}" aria-label="MIYU, back to home" style="display: flex; align-items: center; gap: 14px">
+<img src="/_blob/2dd3c79c35cd1cf27716ffb6ceb93067" alt="" style="width: 34px; height: 50px; object-fit: cover">
+<span class="gold" style="font-size: 22px; letter-spacing: 0.42em; font-weight: 500">MÌYǓ</span>
+</a>
+<nav aria-label="Main navigation" style="display: flex; flex-wrap: wrap; gap: 6px 30px; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase">
+<a href="#top" onClick="{{ goHome }}" style="{{ navHome }}">Home</a>
+<a href="#top" onClick="{{ goCarte }}" style="{{ navCarte }}">Menu</a>
+<a href="#top" onClick="{{ goLounge }}" style="{{ navLounge }}">Lounge &amp; Rooftop</a>
+<a href="#top" onClick="{{ goContact }}" style="{{ navContact }}">Contact</a>
+</nav>
+<div style="display: flex; align-items: center; gap: 12px">
+<a href="Main.dc.html" hreflang="fr" aria-label="Version française" style="display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 0 10px; box-sizing: border-box; font-size: 12px; font-weight: 600; letter-spacing: 0.16em; color: #efc688; border: 1px solid rgba(239,198,136,0.45); border-radius: 999px">FR</a>
+<a href="#top" onClick="{{ goReserve }}" class="btn-gold" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 26px; font-size: 13px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; border-radius: 999px">Book</a>
+</div>
+</div>
+</header>
+
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+<div class="pg-in">
+
+
+<!-- HÉRO -->
+<section id="accueil" class="arches" style="position: relative">
+<div style="max-width: 1240px; margin: 0 auto; padding: 72px 24px 96px; display: flex; flex-wrap: wrap; align-items: center; gap: 56px">
+<div style="flex: 1 1 460px; min-width: 0; display: flex; flex-direction: column; gap: 26px">
+<p class="lr-up lr-d1" style="margin: 0; font-size: 13px; letter-spacing: 0.32em; text-transform: uppercase; color: #efc688">Restaurant · Lounge bar · Rooftop</p>
+<h1 class="lr-up lr-d2" style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: clamp(48px, 6.4vw, 92px); line-height: 0.98; color: #f4ecdd">Japanese artistry,<br><span class="gold" style="font-style: italic">in the heart</span> of Pointe-Noire</h1>
+<p class="lr-up lr-d3" style="margin: 0; max-width: 520px; font-size: 18px; line-height: 1.65; font-weight: 300; color: #c9d2cf">Sushi made before your eyes, grills and Asian flavours, cocktails in the lounge and nights on the rooftop. An elegant address to dine, meet and celebrate.</p>
+<div class="lr-up lr-d4" style="display: flex; flex-wrap: wrap; gap: 14px; padding-top: 6px">
+<a href="#reserver" class="btn-gold" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 34px; font-size: 14px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; border-radius: 999px">Book a table</a>
+<a href="#top" onClick="{{ goCarte }}" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 30px; font-size: 14px; letter-spacing: 0.14em; text-transform: uppercase; border-radius: 999px; border: 1px solid rgba(239,198,136,0.55)">Discover the menu</a>
+</div>
+</div>
+<div style="flex: 1 1 420px; min-width: 0; position: relative; display: flex; gap: 18px; align-items: flex-end">
+<div class="arch-in" style="flex: 1.25 1 0; min-width: 0; border-radius: 220px 220px 18px 18px; overflow: hidden; border: 1px solid rgba(239,198,136,0.45); height: 560px">
+<img src="/_blob/a37e870c8d07976f85ac8eb7729f98ca" alt="Salmon maki topped with fish roe" style="width: 100%; height: 100%; object-fit: cover; display: block">
+</div>
+<div class="arch-in2" style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 18px">
+<div style="border-radius: 18px; overflow: hidden; height: 300px; border: 1px solid rgba(239,198,136,0.25)">
+<img src="/_blob/48b811b402ecee31bee493f0ceda61ad" alt="Large platter of sushi, nigiri and maki" style="width: 100%; height: 100%; object-fit: cover; display: block">
+</div>
+<div style="border-radius: 18px; padding: 22px; background: rgba(239,198,136,0.08); border: 1px solid rgba(239,198,136,0.3)">
+<p style="margin: 0 0 6px; font-family: Allura, cursive; font-size: 34px; line-height: 1" class="gold">Tonight</p>
+<p style="margin: 0; font-size: 14px; line-height: 1.5; color: #c9d2cf">Bookings open for the dining room, the lounge and the rooftop.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- BARRE DE RÉSERVATION -->
+<section id="reserver" class="lr-up lr-d4" style="position: relative; z-index: 1; margin-top: -48px; padding: 0 24px">
+<div style="max-width: 1180px; margin: 0 auto; background: #f4ecdd; color: #022d33; border-radius: 22px; padding: 28px 32px; display: flex; flex-wrap: wrap; align-items: flex-end; gap: 18px 22px; box-shadow: 0 30px 60px rgba(0,0,0,0.35)">
+<div style="flex: 1 1 200px; min-width: 0">
+<h2 style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 30px; font-weight: 600; line-height: 1.05">Book a table</h2>
+<p style="margin: 6px 0 0; font-size: 13px; color: #3e5a5d">Confirmation by email and WhatsApp</p>
+</div>
+<div style="flex: 1 1 180px; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+<label for="r-nom" style="font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #3e5a5d">Name</label>
+<input id="r-nom" type="text" autocomplete="name" placeholder="Your name" style="min-height: 48px; padding: 0 14px; border: 1px solid #c8b893; border-radius: 12px; background: #fffaf0; color: #022d33; font-size: 15px">
+</div>
+<div style="flex: 1 1 180px; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+<label for="r-tel" style="font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #3e5a5d">Phone (WhatsApp)</label>
+<input id="r-tel" type="tel" autocomplete="tel" placeholder="+242 …" style="min-height: 48px; padding: 0 14px; border: 1px solid #c8b893; border-radius: 12px; background: #fffaf0; color: #022d33; font-size: 15px">
+</div>
+<div style="flex: 1 1 150px; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+<label for="r-date" style="font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #3e5a5d">Date</label>
+<input id="r-date" type="date" style="min-height: 48px; padding: 0 14px; border: 1px solid #c8b893; border-radius: 12px; background: #fffaf0; color: #022d33; font-size: 15px">
+</div>
+<div style="flex: 1 1 120px; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+<label for="r-heure" style="font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #3e5a5d">Time</label>
+<select id="r-heure" style="min-height: 48px; padding: 0 12px; border: 1px solid #c8b893; border-radius: 12px; background: #fffaf0; color: #022d33; font-size: 15px">
+<option>12:00</option><option>13:00</option><option>19:00</option><option selected="">20:00</option><option>21:00</option><option>22:00</option>
+</select>
+</div>
+<div style="flex: 1 1 120px; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+<label for="r-pers" style="font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #3e5a5d">Guests</label>
+<select id="r-pers" style="min-height: 48px; padding: 0 12px; border: 1px solid #c8b893; border-radius: 12px; background: #fffaf0; color: #022d33; font-size: 15px">
+<option>1</option><option selected="">2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>8+</option>
+</select>
+</div>
+<div style="flex: 1 1 150px; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+<label for="r-espace" style="font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #3e5a5d">Area</label>
+<select id="r-espace" style="min-height: 48px; padding: 0 12px; border: 1px solid #c8b893; border-radius: 12px; background: #fffaf0; color: #022d33; font-size: 15px">
+<option value="Restaurant">Restaurant</option><option value="Salon privé">Private lounge</option>
+</select>
+</div>
+<button type="button" id="r-submit" data-resa="r" style="flex: 1 1 170px; min-height: 48px; border: 0; border-radius: 12px; background: #022d33; color: #efc688; font-family: Jost, sans-serif; font-size: 14px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer">Book</button>
+</div>
+</section>
+
+<!-- L'EXPÉRIENCE -->
+<section style="padding: 120px 24px 100px">
+<div style="max-width: 1240px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 64px; align-items: center">
+<div style="flex: 1 1 440px; min-width: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px">
+<div class="zoom" style="height: 460px; border-radius: 18px; overflow: hidden">
+<img src="/_blob/09ef1e53ab8b9251075416d7427ba5b1" alt="Marble table set with green plates and linen napkins" style="width: 100%; height: 100%; object-fit: cover; display: block">
+</div>
+<div class="zoom" style="height: 460px; border-radius: 18px; overflow: hidden; margin-top: 60px">
+<img src="/_blob/82e9d89e84cf7fad05e7012f20272adf" alt="MIYU reception desk under a golden chandelier" style="width: 100%; height: 100%; object-fit: cover; display: block">
+</div>
+</div>
+<div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 22px">
+<p style="margin: 0; font-family: Allura, cursive; font-size: 46px; line-height: 1" class="gold">Welcome</p>
+<h2 class="rv" style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: clamp(36px, 4vw, 56px); line-height: 1.05; color: #f4ecdd">An elegant house, made for taking your time</h2>
+<p style="margin: 0; font-size: 17px; line-height: 1.75; font-weight: 300; color: #c9d2cf">Marble tables, golden light, attentive service: at MIYU, every detail sets the evening. The restaurant welcomes your lunches and dinners, the lounge bar your aperitifs and the rooftop your most festive nights.</p>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; padding-top: 12px; border-top: 1px solid rgba(239,198,136,0.22)">
+<div style="padding-top: 16px">
+<p style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 26px; color: #efc688">Restaurant</p>
+<p style="margin: 4px 0 0; font-size: 13px; color: #a9b8b6">Lunch &amp; dinner</p>
+</div>
+<div style="padding-top: 16px">
+<p style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 26px; color: #efc688">Lounge bar</p>
+<p style="margin: 4px 0 0; font-size: 13px; color: #a9b8b6">Cocktails &amp; wines</p>
+</div>
+<div style="padding-top: 16px">
+<p style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 26px; color: #efc688">Rooftop</p>
+<p style="margin: 4px 0 0; font-size: 13px; color: #a9b8b6">Parties &amp; afterworks</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- LA CARTE (aperçu) -->
+<section id="carte" style="padding: 100px 24px; background: #011f24">
+<div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; gap: 48px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 12px; max-width: 640px">
+<p style="margin: 0; font-size: 13px; letter-spacing: 0.32em; text-transform: uppercase; color: #efc688">Menu</p>
+<h2 class="rv" style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: clamp(36px, 4vw, 56px); line-height: 1.05; color: #f4ecdd">The restaurant &amp; fine wines</h2>
+</div>
+<a href="#top" onClick="{{ goCarte }}" class="btn-gold" style="display: inline-flex; align-items: center; min-height: 50px; padding: 0 30px; font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; border-radius: 999px">See the full menu</a>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 24px">
+<article class="rv lift" style="flex: 1 1 460px; min-width: 0; display: flex; flex-direction: column; gap: 22px; padding: 32px; border-radius: 22px; background: #022d33; border: 1px solid rgba(239,198,136,0.28)">
+<div style="display: flex; align-items: center; gap: 18px">
+<div style="flex: 0 0 72px; height: 100px; border-radius: 8px; overflow: hidden; border: 1px solid rgba(239,198,136,0.35)"><img src="/_blob/38038a5a8985e78970873edd77d4a2c9" alt="Restaurant menu cover" style="width: 100%; height: 100%; object-fit: cover; display: block"></div>
+<div><p style="margin: 0; font-family: Allura, cursive; font-size: 36px; line-height: 1" class="gold">The menu</p><h3 style="margin: 4px 0 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 32px; font-weight: 600; color: #f4ecdd">Restaurant</h3></div>
+</div>
+<div><div style="display: flex; justify-content: space-between; gap: 18px; padding: 15px 0; border-bottom: 1px solid rgba(239,198,136,0.16)">
+<div style="min-width: 0"><h4 style="margin: 0; font-size: 14px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #f4ecdd">Truffle edamame &amp; parmesan</h4><p style="margin: 4px 0 0; font-size: 14px; line-height: 1.5; color: #a9b8b6">Boiled soybeans, truffle, parmesan and kosher salt.</p></div>
+<div style="flex: 0 0 auto; text-align: right"><p style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 20px; font-weight: 600; color: #efc688; white-space: nowrap">12 000 M</p></div>
+</div>
+<div style="display: flex; justify-content: space-between; gap: 18px; padding: 15px 0; border-bottom: 1px solid rgba(239,198,136,0.16)">
+<div style="min-width: 0"><h4 style="margin: 0; font-size: 14px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #f4ecdd">Salmon tataki, champagne-goma</h4><p style="margin: 4px 0 0; font-size: 14px; line-height: 1.5; color: #a9b8b6">Seared salmon, furikake, sesame cream, edamame (6 pcs).</p></div>
+<div style="flex: 0 0 auto; text-align: right"><p style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 20px; font-weight: 600; color: #efc688; white-space: nowrap">15 000 M</p></div>
+</div>
+<div style="display: flex; justify-content: space-between; gap: 18px; padding: 15px 0; border-bottom: 1px solid rgba(239,198,136,0.16)">
+<div style="min-width: 0"><h4 style="margin: 0; font-size: 14px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #f4ecdd">Chef Myo's crunchy roll</h4><p style="margin: 4px 0 0; font-size: 14px; line-height: 1.5; color: #a9b8b6">Tempura prawn, truffle mayo, avocado, tobiko, 24k gold leaf (8 pcs).</p></div>
+<div style="flex: 0 0 auto; text-align: right"><p style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 20px; font-weight: 600; color: #efc688; white-space: nowrap">22 000 M</p></div>
+</div>
+<div style="display: flex; justify-content: space-between; gap: 18px; padding: 15px 0; border-bottom: 1px solid rgba(239,198,136,0.16)">
+<div style="min-width: 0"><h4 style="margin: 0; font-size: 14px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #f4ecdd">Rainbow platter</h4><p style="margin: 4px 0 0; font-size: 14px; line-height: 1.5; color: #a9b8b6">30 pieces of sushi, sashimi and maki, for 2 to 4 people.</p></div>
+<div style="flex: 0 0 auto; text-align: right"><p style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 20px; font-weight: 600; color: #efc688; white-space: nowrap">65 000 M</p></div>
+</div>
+<div style="display: flex; justify-content: space-between; gap: 18px; padding: 15px 0; border-bottom: 1px solid rgba(239,198,136,0.16)">
+<div style="min-width: 0"><h4 style="margin: 0; font-size: 14px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #f4ecdd">Pad thai noodles</h4><p style="margin: 4px 0 0; font-size: 14px; line-height: 1.5; color: #a9b8b6">Stir-fried rice noodles, tamarind sauce, chicken, beef or prawns.</p></div>
+<div style="flex: 0 0 auto; text-align: right"><p style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 20px; font-weight: 600; color: #efc688; white-space: nowrap">from 15 000 M</p></div>
+</div>
+<div style="display: flex; justify-content: space-between; gap: 18px; padding: 15px 0; border-bottom: 1px solid rgba(239,198,136,0.16)">
+<div style="min-width: 0"><h4 style="margin: 0; font-size: 14px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #f4ecdd">Wagyu teriyaki (200 g)</h4><p style="margin: 4px 0 0; font-size: 14px; line-height: 1.5; color: #a9b8b6">Wagyu beef, marbling 8-9, vegetables and teriyaki sauce.</p></div>
+<div style="flex: 0 0 auto; text-align: right"><p style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 20px; font-weight: 600; color: #efc688; white-space: nowrap">42 000 M</p></div>
+</div>
+</div>
+<a href="https://drive.google.com/file/d/1xbgtYN97lkoP_aj9wT9NAZNdvsuSKZJa/view?usp=sharing" target="_blank" rel="noopener" style="align-self: flex-start; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; border-bottom: 1px solid rgba(239,198,136,0.5); padding-bottom: 3px">Full menu (PDF) ↗</a>
+</article>
+<article class="rv lift" style="flex: 1 1 460px; min-width: 0; display: flex; flex-direction: column; gap: 22px; padding: 32px; border-radius: 22px; background: #022d33; border: 1px solid rgba(239,198,136,0.28)">
+<div style="display: flex; align-items: center; gap: 18px">
+<div style="flex: 0 0 72px; height: 100px; border-radius: 8px; overflow: hidden; border: 1px solid rgba(239,198,136,0.35)"><img src="/_blob/40a7cc05f2ecb975357ea46cc22cd2c7" alt="Wine list cover" style="width: 100%; height: 100%; object-fit: cover; display: block"></div>
+<div><p style="margin: 0; font-family: Allura, cursive; font-size: 36px; line-height: 1" class="gold">Selection</p><h3 style="margin: 4px 0 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 32px; font-weight: 600; color: #f4ecdd">Wine list</h3></div>
+</div>
+<div><div style="display: flex; justify-content: space-between; gap: 18px; padding: 15px 0; border-bottom: 1px solid rgba(239,198,136,0.16)">
+<div style="min-width: 0"><h4 style="margin: 0; font-size: 14px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #f4ecdd">Château Prieuré-Lichine, Margaux</h4><p style="margin: 4px 0 0; font-size: 14px; line-height: 1.5; color: #a9b8b6">Grand Cru Classé 1855 · structured, elegant red.</p></div>
+<div style="flex: 0 0 auto; text-align: right"><p style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 20px; font-weight: 600; color: #efc688; white-space: nowrap">130 000 M</p></div>
+</div>
+<div style="display: flex; justify-content: space-between; gap: 18px; padding: 15px 0; border-bottom: 1px solid rgba(239,198,136,0.16)">
+<div style="min-width: 0"><h4 style="margin: 0; font-size: 14px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #f4ecdd">Le Clos du Beau-Père, Pomerol</h4><p style="margin: 4px 0 0; font-size: 14px; line-height: 1.5; color: #a9b8b6">Round, velvety red, black cherry and spice.</p></div>
+<div style="flex: 0 0 auto; text-align: right"><p style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 20px; font-weight: 600; color: #efc688; white-space: nowrap">105 000 M</p></div>
+</div>
+<div style="display: flex; justify-content: space-between; gap: 18px; padding: 15px 0; border-bottom: 1px solid rgba(239,198,136,0.16)">
+<div style="min-width: 0"><h4 style="margin: 0; font-size: 14px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #f4ecdd">Domaine Baudouin Millet, Chablis 1er Cru</h4><p style="margin: 4px 0 0; font-size: 14px; line-height: 1.5; color: #a9b8b6">Fresh, mineral and precise white.</p></div>
+<div style="flex: 0 0 auto; text-align: right"><p style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 20px; font-weight: 600; color: #efc688; white-space: nowrap">100 000 M</p></div>
+</div>
+<div style="display: flex; justify-content: space-between; gap: 18px; padding: 15px 0; border-bottom: 1px solid rgba(239,198,136,0.16)">
+<div style="min-width: 0"><h4 style="margin: 0; font-size: 14px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #f4ecdd">Les Charmes de Grand Corbin, Saint-Émilion</h4><p style="margin: 4px 0 0; font-size: 14px; line-height: 1.5; color: #a9b8b6">Round, harmonious red.</p></div>
+<div style="flex: 0 0 auto; text-align: right"><p style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 20px; font-weight: 600; color: #efc688; white-space: nowrap">45 000 M</p><p style="margin: 2px 0 0; font-size: 12px; color: #a9b8b6; white-space: nowrap">Glass · 12 000 M</p></div>
+</div>
+<div style="display: flex; justify-content: space-between; gap: 18px; padding: 15px 0; border-bottom: 1px solid rgba(239,198,136,0.16)">
+<div style="min-width: 0"><h4 style="margin: 0; font-size: 14px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #f4ecdd">Bottega Soave Classico</h4><p style="margin: 4px 0 0; font-size: 14px; line-height: 1.5; color: #a9b8b6">Fresh, light and mineral white.</p></div>
+<div style="flex: 0 0 auto; text-align: right"><p style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 20px; font-weight: 600; color: #efc688; white-space: nowrap">30 000 M</p><p style="margin: 2px 0 0; font-size: 12px; color: #a9b8b6; white-space: nowrap">Glass · 8 000 M</p></div>
+</div>
+<div style="display: flex; justify-content: space-between; gap: 18px; padding: 15px 0; border-bottom: 1px solid rgba(239,198,136,0.16)">
+<div style="min-width: 0"><h4 style="margin: 0; font-size: 14px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #f4ecdd">Émotion de Provence</h4><p style="margin: 4px 0 0; font-size: 14px; line-height: 1.5; color: #a9b8b6">Elegant, fresh and delicate rosé.</p></div>
+<div style="flex: 0 0 auto; text-align: right"><p style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 20px; font-weight: 600; color: #efc688; white-space: nowrap">30 000 M</p></div>
+</div>
+</div>
+<a href="https://drive.google.com/file/d/1G5O3rnC1Wm9KhxlswtnO6mSHJ8gfxfp-/view?usp=sharing" target="_blank" rel="noopener" style="align-self: flex-start; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; border-bottom: 1px solid rgba(239,198,136,0.5); padding-bottom: 3px">Full menu (PDF) ↗</a>
+</article>
+</div>
+<div style="display: flex; justify-content: center"><a href="#top" onClick="{{ goCarte }}" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 28px; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; border-radius: 999px; border: 1px solid rgba(239,198,136,0.55)">Lounge menu, cocktails and all our drinks →</a></div>
+</div>
+</section>
+
+<!-- ÉVÉNEMENTS -->
+<section id="evenements" class="arches" style="padding: 100px 24px">
+<div id="lounge" style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; gap: 48px">
+<div style="display: flex; flex-direction: column; gap: 12px; align-items: center; text-align: center">
+<p style="margin: 0; font-family: Allura, cursive; font-size: 48px; line-height: 1" class="gold">What's on</p>
+<h2 class="rv" style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: clamp(36px, 4vw, 56px); line-height: 1.05; color: #f4ecdd">Lounge &amp; Rooftop</h2>
+<p style="margin: 0; max-width: 560px; font-size: 16px; line-height: 1.6; color: #a9b8b6">Every week, a night to remember. Bookings only.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px">
+<article class="rv lift" style="background: rgba(1,31,36,0.85); border: 1px solid rgba(239,198,136,0.28); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column">
+<div class="zoom" style="height: 330px; overflow: hidden">
+<img src="/_blob/df4cdd182d34881963f857372cddcb1f" alt="Wagyu &amp; Wine poster" style="width: 100%; height: 100%; object-fit: cover; object-position: top; display: block">
+</div>
+<div style="padding: 24px; display: flex; flex-direction: column; gap: 10px">
+<p style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #efc688">Every Wednesday</p>
+<h3 style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 30px; font-weight: 600; color: #f4ecdd">Wagyu &amp; Wine</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #a9b8b6">Special lunch and dinner: marbling-9 wagyu served with a glass of wine.</p>
+</div>
+</article>
+<article class="rv lift" style="background: rgba(1,31,36,0.85); border: 1px solid rgba(239,198,136,0.28); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column">
+<div class="zoom" style="height: 330px; overflow: hidden">
+<img src="/_blob/f6fa67ebc528fd314bda967cddfb7ff2" alt="After Work Rooftop Party poster" style="width: 100%; height: 100%; object-fit: cover; object-position: top; display: block">
+</div>
+<div style="padding: 24px; display: flex; flex-direction: column; gap: 10px">
+<p style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #efc688">Every Friday</p>
+<h3 style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 30px; font-weight: 600; color: #f4ecdd">After Work · Rooftop 1+1</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #a9b8b6">Buy one bottle, get one free, on the rooftop.</p>
+</div>
+</article>
+<article class="rv lift" style="background: rgba(1,31,36,0.85); border: 1px solid rgba(239,198,136,0.28); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column">
+<div class="zoom" style="height: 330px; overflow: hidden">
+<img src="/_blob/262c490de58492f1f662ae18dc6b2b38" alt="Champagne Night Rooftop Vibes poster" style="width: 100%; height: 100%; object-fit: cover; object-position: top; display: block">
+</div>
+<div style="padding: 24px; display: flex; flex-direction: column; gap: 10px">
+<p style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #efc688">Special nights · 10 pm</p>
+<h3 style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 30px; font-weight: 600; color: #f4ecdd">Champagne Night</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #a9b8b6">Elegant mood and an exclusive atmosphere on the rooftop. Ladies Night: [DAY &amp; CONDITIONS].</p>
+</div>
+</article>
+</div>
+</div>
+</section>
+
+<!-- LA BRIGADE -->
+<section style="padding: 100px 24px; background: #011f24">
+<div style="max-width: 1240px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 56px; align-items: center">
+<div class="rv zoom" style="flex: 1.3 1 480px; min-width: 0; border-radius: 18px; overflow: hidden; border: 1px solid rgba(239,198,136,0.3); height: 460px">
+<img src="/_blob/b61a3450a8a8e4b07eaec2c6db0e074a" alt="The MIYU kitchen team in front of the illuminated logo" style="width: 100%; height: 100%; object-fit: cover; display: block">
+</div>
+<div style="flex: 1 1 360px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+<p style="margin: 0; font-size: 13px; letter-spacing: 0.32em; text-transform: uppercase; color: #efc688">Our kitchen team</p>
+<h2 class="rv" style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: clamp(34px, 3.6vw, 50px); line-height: 1.08; color: #f4ecdd">Passionate chefs, know-how from Asia</h2>
+<p style="margin: 0; font-size: 17px; line-height: 1.75; font-weight: 300; color: #c9d2cf">Sushi, wok and grill: our kitchen team prepares every plate with precision and generosity, from lunch until the last service.</p>
+</div>
+</div>
+</section>
+
+<!-- APPEL À RÉSERVER + CONTACT -->
+<section id="contact" class="arches" style="padding: 110px 24px">
+<div style="max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 28px; text-align: center">
+<img src="/_blob/613125ea1f306bb78e9ad502181f7abc" alt="MIYU logo" style="width: 150px; height: auto; display: block">
+<h2 class="rv" style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: clamp(38px, 4.4vw, 62px); line-height: 1.05; color: #f4ecdd">Your table is waiting</h2>
+<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 14px">
+<a href="#reserver" class="btn-gold" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 34px; font-size: 14px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; border-radius: 999px">Book online</a>
+<a href="tel:+242057739999" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 30px; font-size: 14px; letter-spacing: 0.1em; border-radius: 999px; border: 1px solid rgba(239,198,136,0.55)">+242 05 773 9999</a>
+</div>
+<div style="width: 100%; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-top: 28px; text-align: left">
+<div style="padding: 26px; border-radius: 16px; background: rgba(1,31,36,0.85); border: 1px solid rgba(239,198,136,0.25)">
+<p style="margin: 0 0 10px; font-size: 12px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #efc688">Address</p>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #e9e2d4">K Galerie, Block no. 145.205<br>Avenue François Charles, City centre<br>Ref.: New SNPC building, Pointe-Noire</p>
+</div>
+<div style="padding: 26px; border-radius: 16px; background: rgba(1,31,36,0.85); border: 1px solid rgba(239,198,136,0.25)">
+<p style="margin: 0 0 10px; font-size: 12px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #efc688">Opening hours</p>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #e9e2d4">Restaurant: [HOURS]<br>Lounge &amp; rooftop: [HOURS]</p>
+</div>
+<div style="padding: 26px; border-radius: 16px; background: rgba(1,31,36,0.85); border: 1px solid rgba(239,198,136,0.25)">
+<p style="margin: 0 0 10px; font-size: 12px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #efc688">Bookings</p>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #e9e2d4">+242 05 773 9999<br>[EMAIL] · [INSTAGRAM]</p>
+</div>
+</div>
+</div>
+</section>
+
+</div>
+</sc-if>
+
+<!-- PAGE LA CARTE -->
+<sc-if value="{{ isCarte }}" hint-placeholder-val="{{ false }}">
+<div class="pg-in">
+<section id="carte-top" class="arches" style="padding: 72px 24px 56px">
+<div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; gap: 36px; align-items: center; text-align: center">
+<div style="display: flex; flex-direction: column; gap: 14px; align-items: center">
+<p class="lr-up lr-d1 gold" style="margin: 0; font-family: Allura, cursive; font-size: 52px; line-height: 1">Menu</p>
+<h1 class="lr-up lr-d2" style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: clamp(42px, 5.4vw, 76px); line-height: 1; color: #f4ecdd">Our menus</h1>
+<p class="lr-up lr-d3" style="margin: 0; max-width: 600px; font-size: 17px; line-height: 1.65; font-weight: 300; color: #c9d2cf">A preview of each section. Open the full PDF menu to discover the whole selection.</p>
+</div>
+<div class="lr-up lr-d4" role="tablist" aria-label="Choose a menu" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px">
+<sc-for list="{{ tabs }}" as="t" hint-placeholder-count="4">
+<button type="button" role="tab" aria-selected="{{ t.sel }}" onClick="{{ t.select }}" style="{{ t.style }}">{{ t.label }}</button>
+</sc-for>
+</div>
+</div>
+</section>
+
+<section style="padding: 0 24px 100px; background: #022d33">
+<div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; gap: 32px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 28px; padding: 28px; border-radius: 22px; background: #f4ecdd; color: #022d33">
+<div style="flex: 0 0 110px; height: 156px; border-radius: 10px; overflow: hidden; box-shadow: 0 10px 24px rgba(0,0,0,0.25)">
+<img src="{{ menu.cover }}" alt="Couverture : {{ menu.title }}" style="width: 100%; height: 100%; object-fit: cover; display: block">
+</div>
+<div style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 8px">
+<p style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase; color: #9a6f3c">{{ menu.kicker }}</p>
+<h2 class="rv" style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(32px, 3.4vw, 46px); font-weight: 600; line-height: 1.05">{{ menu.title }}</h2>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #3e5a5d">{{ menu.intro }}</p>
+</div>
+<a href="{{ menu.link }}" target="_blank" rel="noopener" style="flex: 0 0 auto; display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 28px; border-radius: 999px; background: #022d33; color: #efc688; font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase">Full menu (PDF) ↗</a>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px">
+<sc-for list="{{ menu.sections }}" as="sec" hint-placeholder-count="6">
+<article class="rv lift" style="display: flex; flex-direction: column; padding: 24px; border-radius: 18px; background: #011f24; border: 1px solid rgba(239,198,136,0.22)">
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid rgba(239,198,136,0.3)">
+<h3 style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 26px; font-weight: 600; line-height: 1.1" class="gold">{{ sec.t }}</h3>
+<p style="margin: 0; flex: 0 0 auto; font-size: 12px; letter-spacing: 0.08em; color: #a9b8b6">{{ sec.count }}</p>
+</div>
+<sc-for list="{{ sec.items }}" as="it" hint-placeholder-count="3">
+<div style="display: flex; justify-content: space-between; gap: 14px; padding: 12px 0; border-bottom: 1px solid rgba(239,198,136,0.1)">
+<p style="margin: 0; min-width: 0; font-size: 14px; line-height: 1.45; color: #e9e2d4">{{ it.n }}</p>
+<p style="margin: 0; flex: 0 0 auto; font-size: 14px; font-weight: 600; color: #efc688; white-space: nowrap">{{ it.p }}</p>
+</div>
+</sc-for>
+<p style="margin: 12px 0 0; font-size: 13px; color: #a9b8b6">{{ sec.more }}</p>
+</article>
+</sc-for>
+</div>
+
+<sc-if value="{{ showPrestige }}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 18px; padding-top: 12px">
+<p style="margin: 0; font-family: Allura, cursive; font-size: 40px; line-height: 1" class="gold">Prestige collection</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px">
+<sc-for list="{{ prestige }}" as="b" hint-placeholder-count="6">
+<div style="border-radius: 14px; overflow: hidden; background: #f9f5ec; color: #022d33">
+<img src="{{ b.img }}" alt="Bouteille {{ b.n }}" style="width: 100%; height: 190px; object-fit: cover; object-position: center 35%; display: block">
+<div style="padding: 12px 14px">
+<p style="margin: 0; font-size: 13px; font-weight: 600; line-height: 1.3">{{ b.n }}</p>
+<p style="margin: 4px 0 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 19px; font-weight: 600">{{ b.p }}</p>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; padding-top: 12px">
+<a href="{{ menu.link }}" target="_blank" rel="noopener" class="btn-gold" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 32px; font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; border-radius: 999px">See the full PDF menu ↗</a>
+<a href="#top" onClick="{{ goReserve }}" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 30px; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; border-radius: 999px; border: 1px solid rgba(239,198,136,0.55)">Book a table</a>
+</div>
+<p style="margin: 0; text-align: center; font-size: 12px; color: #8fa3a1">Prices in M. Allergens and full details in the PDF menus.</p>
+</div>
+</section>
+</div>
+</sc-if>
+
+<!-- PAGE LOUNGE & ROOFTOP -->
+<sc-if value="{{ isLounge }}" hint-placeholder-val="{{ false }}">
+<div class="pg-in">
+<div style="background: #010e10">
+<section aria-label="Lounge and rooftop atmosphere" style="position: relative; height: min(86vh, 820px); min-height: 520px; overflow: hidden; background: #010e10">
+<div class="lr-reveal" style="position: absolute; inset: 0">
+<sc-for list="{{ loungeSlides }}" as="sl" hint-placeholder-count="4">
+<img src="{{ sl.src }}" alt="{{ sl.alt }}" style="{{ sl.style }}">
+</sc-for>
+</div>
+<div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(1,14,16,0.55) 0%, rgba(1,14,16,0.05) 32%, rgba(1,14,16,0.35) 62%, rgba(1,14,16,0.97) 100%)"></div>
+<div class="lr-glow" style="position: absolute; left: -10%; bottom: -30%; width: 70%; height: 70%; background: radial-gradient(closest-side, rgba(239,198,136,0.22), transparent); pointer-events: none"></div>
+<div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 0 24px 56px">
+<div style="max-width: 1240px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 28px">
+<div style="flex: 1 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<p class="lr-up lr-d1 gold" style="margin: 0; font-family: Allura, cursive; font-size: clamp(40px, 4.4vw, 60px); line-height: 1">The night starts here</p>
+<h1 class="lr-up lr-d2" style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: clamp(48px, 7vw, 104px); line-height: 0.95; color: #f8f1e3; text-shadow: 0 6px 40px rgba(0,0,0,0.5)">Lounge &amp; Rooftop</h1>
+<div class="lr-line" style="width: 120px; height: 2px; background: linear-gradient(90deg, #efc688, rgba(239,198,136,0))"></div>
+<p class="lr-up lr-d3" style="margin: 0; max-width: 540px; font-size: 18px; line-height: 1.65; font-weight: 300; color: #e3ddd0">Signature cocktails, DJ sets and big bottles under the Pointe-Noire stars. Afterworks, theme nights and evenings on the rooftop.</p>
+<div class="lr-up lr-d4" style="display: flex; flex-wrap: wrap; gap: 14px; padding-top: 6px">
+<a href="#top" onClick="{{ goReserve }}" class="btn-gold" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 32px; font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; border-radius: 999px">Book a table</a>
+<a href="#lr-soirees" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 30px; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; border-radius: 999px; border: 1px solid rgba(239,198,136,0.6); color: #efc688; background: rgba(1,14,16,0.35)">The nights</a>
+</div>
+</div>
+<div class="lr-up lr-d4" role="group" aria-label="Choose a photo" style="display: flex; gap: 10px; padding-bottom: 8px">
+<sc-for list="{{ loungeSlides }}" as="sl" hint-placeholder-count="4">
+<button type="button" class="lr-dot" aria-label="{{ sl.label }}" aria-pressed="{{ sl.pressed }}" onClick="{{ sl.pick }}" style="{{ sl.dot }}"></button>
+</sc-for>
+</div>
+</div>
+</div>
+</section>
+
+<section style="padding: 90px 24px 40px">
+<div style="max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 28px">
+<div style="padding-top: 18px; border-top: 1px solid rgba(239,198,136,0.35)">
+<p style="margin: 0 0 8px; font-size: 12px; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; color: #efc688">The lounge</p>
+<p style="margin: 0; font-size: 16px; line-height: 1.65; color: #c9d2cf">Velvet banquettes, a cocktail bar and table service for bottles.</p>
+</div>
+<div style="padding-top: 18px; border-top: 1px solid rgba(239,198,136,0.35)">
+<p style="margin: 0 0 8px; font-size: 12px; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; color: #efc688">The rooftop</p>
+<p style="margin: 0; font-size: 16px; line-height: 1.65; color: #c9d2cf">Open-air, above the city: DJs, lights and nights that last until dawn.</p>
+</div>
+<div style="padding-top: 18px; border-top: 1px solid rgba(239,198,136,0.35)">
+<p style="margin: 0 0 8px; font-size: 12px; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; color: #efc688">Your events</p>
+<p style="margin: 0; font-size: 16px; line-height: 1.65; color: #c9d2cf">Birthdays, company afterworks, private hire: <a href="#top" onClick="{{ goContact }}" style="color: #efc688; border-bottom: 1px solid rgba(239,198,136,0.5)">let's talk</a>.</p>
+</div>
+</div>
+</section>
+
+<section id="lr-soirees" style="padding: 60px 24px 110px">
+<div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; gap: 44px">
+<div style="display: flex; flex-direction: column; gap: 12px; align-items: center; text-align: center">
+<p style="margin: 0; font-family: Allura, cursive; font-size: 48px; line-height: 1" class="gold">What's on</p>
+<h2 class="rv" style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: clamp(36px, 4vw, 56px); line-height: 1.05; color: #f4ecdd">Every week, a night to remember</h2>
+<p style="margin: 0; max-width: 560px; font-size: 16px; line-height: 1.6; color: #a9b8b6">Bookings only.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px">
+<article class="rv lift" style="background: #031417; border: 1px solid rgba(239,198,136,0.28); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column">
+<div class="zoom" style="height: 330px; overflow: hidden">
+<img src="/_blob/22062bce2b31d20681ea522d32b88162" alt="Golden Hour, Happy Hour poster" style="width: 100%; height: 100%; object-fit: cover; object-position: top; display: block">
+</div>
+<div style="padding: 24px; display: flex; flex-direction: column; gap: 10px">
+<p style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #efc688">Tue · Wed · Thu · Sun · 4–7 pm</p>
+<h3 style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 30px; font-weight: 600; color: #f4ecdd">Golden Hour · Happy Hour</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #a9b8b6">1+1: buy one, get one free, from 4 to 7 pm. Booking required.</p>
+</div>
+</article>
+<article class="rv lift" style="background: #031417; border: 1px solid rgba(239,198,136,0.28); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column">
+<div class="zoom" style="height: 330px; overflow: hidden">
+<img src="/_blob/df4cdd182d34881963f857372cddcb1f" alt="Wagyu &amp; Wine poster" style="width: 100%; height: 100%; object-fit: cover; object-position: top; display: block">
+</div>
+<div style="padding: 24px; display: flex; flex-direction: column; gap: 10px">
+<p style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #efc688">Every Wednesday</p>
+<h3 style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 30px; font-weight: 600; color: #f4ecdd">Wagyu &amp; Wine</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #a9b8b6">Special lunch and dinner: marbling-9 wagyu served with a glass of wine.</p>
+</div>
+</article>
+<article class="rv lift" style="background: #031417; border: 1px solid rgba(239,198,136,0.28); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column">
+<div class="zoom" style="height: 330px; overflow: hidden">
+<img src="/_blob/f6fa67ebc528fd314bda967cddfb7ff2" alt="After Work Rooftop Party poster" style="width: 100%; height: 100%; object-fit: cover; object-position: top; display: block">
+</div>
+<div style="padding: 24px; display: flex; flex-direction: column; gap: 10px">
+<p style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #efc688">Every Friday</p>
+<h3 style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 30px; font-weight: 600; color: #f4ecdd">After Work · Rooftop 1+1</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #a9b8b6">Buy one bottle, get one free, on the rooftop.</p>
+</div>
+</article>
+<article class="rv lift" style="background: #031417; border: 1px solid rgba(239,198,136,0.28); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column">
+<div class="zoom" style="height: 330px; overflow: hidden">
+<img src="/_blob/262c490de58492f1f662ae18dc6b2b38" alt="Champagne Night Rooftop Vibes poster" style="width: 100%; height: 100%; object-fit: cover; object-position: top; display: block">
+</div>
+<div style="padding: 24px; display: flex; flex-direction: column; gap: 10px">
+<p style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #efc688">Special nights · 10 pm</p>
+<h3 style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 30px; font-weight: 600; color: #f4ecdd">Champagne Night</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #a9b8b6">Elegant mood and an exclusive atmosphere on the rooftop. Ladies Night: [DAY &amp; CONDITIONS].</p>
+</div>
+</article>
+</div>
+</div>
+</section>
+</div>
+</div>
+</sc-if>
+
+<!-- PAGE CONTACT -->
+<sc-if value="{{ isContact }}" hint-placeholder-val="{{ false }}">
+<div class="pg-in">
+<section class="arches" style="padding: 72px 24px 64px">
+<div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; align-items: center; text-align: center">
+<p class="lr-up lr-d1 gold" style="margin: 0; font-family: Allura, cursive; font-size: 52px; line-height: 1">Contact</p>
+<h1 class="lr-up lr-d2" style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: clamp(42px, 5.4vw, 76px); line-height: 1; color: #f4ecdd">Write to us</h1>
+<p class="lr-up lr-d3" style="margin: 0; max-width: 560px; font-size: 17px; line-height: 1.65; font-weight: 300; color: #c9d2cf">A question, a private event or a table to book: our team will get back to you quickly.</p>
+</div>
+</section>
+
+<section id="contact-reserver" class="lr-up lr-d4" style="padding: 0 24px">
+<div style="max-width: 1180px; margin: 0 auto">
+<div style="margin: 0; background: #f4ecdd; color: #022d33; border-radius: 22px; padding: 28px 32px; display: flex; flex-wrap: wrap; align-items: flex-end; gap: 18px 22px; box-shadow: 0 24px 50px rgba(0,0,0,0.3)">
+<div style="flex: 1 1 200px; min-width: 0">
+<h2 style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 30px; font-weight: 600; line-height: 1.05">Book a table</h2>
+<p style="margin: 6px 0 0; font-size: 13px; color: #3e5a5d">Confirmation by email and WhatsApp</p>
+</div>
+<div style="flex: 1 1 180px; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+<label for="c-nom" style="font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #3e5a5d">Name</label>
+<input id="c-nom" type="text" autocomplete="name" placeholder="Your name" style="min-height: 48px; padding: 0 14px; border: 1px solid #c8b893; border-radius: 12px; background: #fffaf0; color: #022d33; font-size: 15px">
+</div>
+<div style="flex: 1 1 180px; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+<label for="c-tel" style="font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #3e5a5d">Phone (WhatsApp)</label>
+<input id="c-tel" type="tel" autocomplete="tel" placeholder="+242 …" style="min-height: 48px; padding: 0 14px; border: 1px solid #c8b893; border-radius: 12px; background: #fffaf0; color: #022d33; font-size: 15px">
+</div>
+<div style="flex: 1 1 150px; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+<label for="c-date" style="font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #3e5a5d">Date</label>
+<input id="c-date" type="date" style="min-height: 48px; padding: 0 14px; border: 1px solid #c8b893; border-radius: 12px; background: #fffaf0; color: #022d33; font-size: 15px">
+</div>
+<div style="flex: 1 1 120px; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+<label for="c-heure" style="font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #3e5a5d">Time</label>
+<select id="c-heure" style="min-height: 48px; padding: 0 12px; border: 1px solid #c8b893; border-radius: 12px; background: #fffaf0; color: #022d33; font-size: 15px">
+<option>12:00</option><option>13:00</option><option>19:00</option><option selected="">20:00</option><option>21:00</option><option>22:00</option>
+</select>
+</div>
+<div style="flex: 1 1 120px; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+<label for="c-pers" style="font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #3e5a5d">Guests</label>
+<select id="c-pers" style="min-height: 48px; padding: 0 12px; border: 1px solid #c8b893; border-radius: 12px; background: #fffaf0; color: #022d33; font-size: 15px">
+<option>1</option><option selected="">2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>8+</option>
+</select>
+</div>
+<div style="flex: 1 1 150px; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+<label for="c-espace" style="font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #3e5a5d">Area</label>
+<select id="c-espace" style="min-height: 48px; padding: 0 12px; border: 1px solid #c8b893; border-radius: 12px; background: #fffaf0; color: #022d33; font-size: 15px">
+<option value="Restaurant">Restaurant</option><option value="Salon privé">Private lounge</option>
+</select>
+</div>
+<button type="button" id="c-submit" data-resa="c" style="flex: 1 1 170px; min-height: 48px; border: 0; border-radius: 12px; background: #022d33; color: #efc688; font-family: Jost, sans-serif; font-size: 14px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer">Book</button>
+</div>
+</div>
+</section>
+
+<section style="padding: 72px 24px 100px">
+<div style="max-width: 1180px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 56px">
+<div style="flex: 1.6 1 460px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
+<h2 class="rv" style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: 40px; line-height: 1.1; color: #f4ecdd">Contact form</h2>
+<form onSubmit="{{ noSubmit }}" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px">
+<div style="display: flex; flex-direction: column; gap: 6px; min-width: 0">
+<label for="f-nom" style="font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #a9b8b6">Full name</label>
+<input id="f-nom" type="text" autocomplete="name" style="min-height: 48px; padding: 0 14px; border: 1px solid rgba(239,198,136,0.35); border-radius: 12px; background: #011f24; color: #f4ecdd; font-family: Jost, sans-serif; font-size: 15px">
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px; min-width: 0">
+<label for="f-tel" style="font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #a9b8b6">Phone</label>
+<input id="f-tel" type="tel" autocomplete="tel" style="min-height: 48px; padding: 0 14px; border: 1px solid rgba(239,198,136,0.35); border-radius: 12px; background: #011f24; color: #f4ecdd; font-family: Jost, sans-serif; font-size: 15px">
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px; min-width: 0">
+<label for="f-mail" style="font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #a9b8b6">Email</label>
+<input id="f-mail" type="email" autocomplete="email" style="min-height: 48px; padding: 0 14px; border: 1px solid rgba(239,198,136,0.35); border-radius: 12px; background: #011f24; color: #f4ecdd; font-family: Jost, sans-serif; font-size: 15px">
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px; min-width: 0">
+<label for="f-sujet" style="font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #a9b8b6">Subject</label>
+<select id="f-sujet" style="min-height: 48px; padding: 0 14px; border: 1px solid rgba(239,198,136,0.35); border-radius: 12px; background: #011f24; color: #f4ecdd; font-family: Jost, sans-serif; font-size: 15px"><option>Information</option><option>Private event</option><option>Private hire</option><option>Other</option></select>
+</div>
+<div style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 6px">
+<label for="f-msg" style="font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #a9b8b6">Message</label>
+<textarea id="f-msg" rows="6" style="padding: 14px; border: 1px solid rgba(239,198,136,0.35); border-radius: 12px; background: #011f24; color: #f4ecdd; font-family: Jost, sans-serif; font-size: 15px; line-height: 1.5; resize: vertical"></textarea>
+</div>
+<div style="grid-column: 1 / -1"><button type="submit" class="btn-gold" style="min-height: 52px; padding: 0 36px; border: 0; border-radius: 999px; font-family: Jost, sans-serif; font-size: 14px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer">Send message</button></div>
+</form>
+</div>
+<aside style="flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; padding: 8px 32px 24px; border-radius: 20px; background: #011f24; border: 1px solid rgba(239,198,136,0.25)">
+<div style="padding: 22px 0; border-bottom: 1px solid rgba(239,198,136,0.18)">
+<p style="margin: 0 0 8px; font-size: 12px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #efc688">Address</p>
+<p style="margin: 0; font-size: 15px; line-height: 1.65; color: #e9e2d4">K Galerie, Block no. 145.205<br>Avenue François Charles, City centre<br>Ref.: New SNPC building, Pointe-Noire</p>
+</div>
+<div style="padding: 22px 0; border-bottom: 1px solid rgba(239,198,136,0.18)">
+<p style="margin: 0 0 8px; font-size: 12px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #efc688">Phone &amp; WhatsApp</p>
+<p style="margin: 0; font-size: 15px; line-height: 1.65; color: #e9e2d4"><a href="tel:+242057739999">+242 05 773 9999</a></p>
+</div>
+<div style="padding: 22px 0; border-bottom: 1px solid rgba(239,198,136,0.18)">
+<p style="margin: 0 0 8px; font-size: 12px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #efc688">Email</p>
+<p style="margin: 0; font-size: 15px; line-height: 1.65; color: #e9e2d4">[EMAIL]</p>
+</div>
+<div style="padding: 22px 0; border-bottom: 1px solid rgba(239,198,136,0.18)">
+<p style="margin: 0 0 8px; font-size: 12px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #efc688">Opening hours</p>
+<p style="margin: 0; font-size: 15px; line-height: 1.65; color: #e9e2d4">Restaurant: [HOURS]<br>Lounge &amp; rooftop: [HOURS]</p>
+</div>
+<div style="padding: 22px 0; border-bottom: 1px solid rgba(239,198,136,0.18)">
+<p style="margin: 0 0 8px; font-size: 12px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #efc688">Social media</p>
+<p style="margin: 0; font-size: 15px; line-height: 1.65; color: #e9e2d4">[INSTAGRAM] · [FACEBOOK]</p>
+</div>
+</aside>
+</div>
+</section>
+</div>
+</sc-if>
+
+<!-- PIED DE PAGE -->
+<footer style="border-top: 1px solid rgba(239,198,136,0.18); background: #011f24">
+<div style="max-width: 1240px; margin: 0 auto; padding: 28px 24px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; font-size: 13px; color: #8fa3a1">
+<span class="gold" style="letter-spacing: 0.42em; font-size: 16px">MÌYǓ</span>
+<span>Restaurant &amp; Lounge Bar · Pointe-Noire, Republic of the Congo</span>
+<span>© 2026 MIYU</span>
+</div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":5600}}'>
+class Component extends DCLogic {
+  state = { view: 'home', tab: 'resto', slide: 0 };
+  componentDidMount() {
+    this._timer = setInterval(() => {
+      if (this.state.view === 'lounge') this.setState({ slide: (this.state.slide + 1) % 4 });
+    }, 5500);
+  }
+  componentWillUnmount() {
+    clearInterval(this._timer);
+  }
+  go(view, id) {
+    return (e) => {
+      if (e && e.preventDefault) e.preventDefault();
+      this.setState({ view });
+      setTimeout(() => {
+        const el = id ? document.getElementById(id) : null;
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        else window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 60);
+    };
+  }
+  renderVals() {
+    const R = (rows) => rows.map(([n, p]) => ({ n, p: p + ' M' }));
+    const sec = (t, total, rows) => ({ t, count: total + (total > 1 ? ' dishes' : ' dish'), items: R(rows), more: total > rows.length ? '+ ' + (total - rows.length) + ' more in the full menu' : '' });
+    const secB = (t, total, rows) => ({ t, count: total + ' ref.', items: R(rows), more: total > rows.length ? '+ ' + (total - rows.length) + ' more in the full menu' : '' });
+    const menus = {
+      resto: {
+        label: 'Restaurant', kicker: 'Pan-Asian cuisine', title: 'Restaurant menu',
+        intro: 'Sushi, maki and sashimi, Thai and Sichuan cuisine, signature grills and desserts.',
+        cover: '/_blob/38038a5a8985e78970873edd77d4a2c9',
+        link: 'https://drive.google.com/file/d/1xbgtYN97lkoP_aj9wT9NAZNdvsuSKZJa/view?usp=sharing',
+        sections: [
+          sec('Signature starters', 10, [['Truffle edamame & parmesan', '12 000'], ['Korean-style chicken popcorn', '14 000'], ['Cajun-spiced soft-shell crab', '16 000']]),
+          sec('Tataki, tartare & carpaccio', 6, [['Salmon tataki, champagne-goma', '15 000'], ['Tuna tartare', '23 000'], ['Wagyu beef carpaccio', '23 000']]),
+          sec('Nigiri & sashimi', 13, [['Tuna nigiri with foie gras (2 pcs)', '10 000'], ['Wagyu nigiri, quail egg (2 pcs)', '10 000'], ['Salmon sashimi (4 slices)', '12 000']]),
+          sec('Maki', 11, [['California maki (8 pcs)', '15 000'], ['Spicy lobster volcano roll', '22 000'], ['Chef Myo\'s crunchy roll', '22 000']]),
+          sec('Temaki & gunkan', 6, [['Tempura shrimp temaki (2 pcs)', '13 000'], ['Uni gunkan, sea urchin (2 pcs)', '10 000'], ['Ikura gunkan (2 pcs)', '9 000']]),
+          sec('MIYU platters', 2, [['Rainbow platter (30 pcs)', '65 000'], ['Ocean sashimi platter (18 pcs)', '52 000']]),
+          sec('Salads & soups', 6, [['Crab salad', '17 500'], ["Spicy Alaskan king crab miso soup", '13 500'], ['Tom Yum soup', '12 000']]),
+          sec('Thai cuisine, curry & rice', 4, [['Thai green or red curry', 'from 15 000'], ['Pad thai noodles', 'from 15 000'], ['Chicken pad krapow', '15 000']]),
+          sec('Sichuan, noodles & wok', 7, [['Stir-fried noodles', 'from 14 000'], ['Singapore-style prawns', '18 500'], ['Kung pao chicken', '15 000']]),
+          sec('Dim sum & bao', 6, [['MIYU special open bao (2 pcs)', '8 000'], ['Prawn har gow (4 pcs)', '7 000'], ['Truffle edamame dumplings (4 pcs)', '7 000']]),
+          sec('Chef\'s signatures', 4, [['Salmon tulip with uni & beluga caviar', '18 000'], ['New-style truffle tuna pizza', '25 000'], ['Tataki nigiri duo (4 pcs)', '16 000']]),
+          sec('Signature grill', 7, [['Wagyu teriyaki 200 g (marbling 8-9)', '42 000'], ['Boom Boom Kamo-Kimchee (duck)', '24 000'], ["Lamb chops (3 pcs)", '23 000']]),
+          sec('Desserts', 10, [['MIYU special dessert platter', '16 000'], ['Hot chocolate bomb', '13 000'], ['Pandan crème brûlée', '7 000']]),
+          sec('Sides', 4, [['Steamed rice', '3 500'], ['French fries', '3 500'], ['Creamy mushroom sauce', '3 500']])
+        ]
+      },
+      lounge: {
+        label: 'Lounge', kicker: 'Lounge menu', title: 'Bites & cigars',
+        intro: 'Bites to share, luxury cigars and big bottles, served in the lounge and on the rooftop.',
+        cover: '/_blob/db4f4c6ee5f486b31877600347de2750',
+        link: 'https://drive.google.com/file/d/12nAoXtnbYL0TscZJjwNm8QdPOXgzNZ2y/view?usp=sharing',
+        sections: [
+          sec('Lounge bites', 6, [['Wagyu sando', '18 000'], ['Hibachi kushiyaki (5 skewers)', '13 000'], ['Cheese platter', '13 000']]),
+          { t: 'Luxury cigars', count: '3 ref.', items: [{ n: 'Davidoff', p: '' }, { n: 'Olive Cigar', p: '' }, { n: 'Gran Robusto Gold Edition', p: '' }], more: 'Prices from our team' },
+          secB('Bottles in the lounge', 65, [['Champagnes, from Gobillard to Armand de Brignac', 'from 60 000'], ['Cognacs, from Hennessy VS to Louis XIII', 'from 60 000'], ['Whiskies, gins, vodkas, tequilas, liqueurs', 'from 35 000']])
+        ]
+      },
+      vins: {
+        label: 'Wines', kicker: 'Wine collection', title: 'Wine list',
+        intro: 'Great appellations and discoveries from around the world, chosen to go with pan-Asian cuisine.',
+        cover: '/_blob/40a7cc05f2ecb975357ea46cc22cd2c7',
+        link: 'https://drive.google.com/file/d/1G5O3rnC1Wm9KhxlswtnO6mSHJ8gfxfp-/view?usp=sharing',
+        sections: [
+          secB('Red wines', 21, [['Château Prieuré-Lichine, Margaux', '130 000'], ['Le Clos du Beau-Père, Pomerol', '105 000'], ['Les Charmes de Grand Corbin, St-Émilion', '45 000']]),
+          secB('White wines', 20, [['Baudouin Millet, Chablis 1er Cru Beauroy', '100 000'], ['Bertrand Bachelet, Chassagne-Montrachet', '80 000'], ['Bottega Soave Classico', '30 000']]),
+          secB('Rosé wines', 6, [['Émotion de Provence', '30 000'], ['Clarendelle Rosé', '30 000'], ["Rosé d'Anjou", '20 000']]),
+          secB('Champagnes', 12, [['Armand de Brignac Brut', '680 000'], ['Dom Pérignon Brut', '430 000'], ['Ruinart Blanc de Blancs', '200 000']])
+        ]
+      },
+      boissons: {
+        label: 'Bar & drinks', kicker: 'Drinks list', title: 'Cocktails & spirits',
+        intro: 'Signature and classic cocktails, mocktails, spirits, beers, soft drinks and hot drinks.',
+        cover: '/_blob/2b7333268a76d83fae6e13dde67396f7',
+        link: 'https://drive.google.com/file/d/1hLWP7Ec2ORR6T7snVTXL2G51DMAR8FDR/view?usp=sharing',
+        sections: [
+          secB('Signature mixology', 12, [['The Miyu Berry', '15 000'], ['Smoky Negroni', '11 000'], ['Smoky House', '14 000']]),
+          secB('Classic cocktails', 11, [['Pornstar Martini', '11 000'], ['Mai Tai', '10 000'], ['Espresso Martini', '9 000']]),
+          secB('Mocktails', 6, [['Virgin Mojito', '7 000'], ['Elderflower Spritzer', '7 000'], ['Amber Glow', '7 000']]),
+          secB('Cognac & Armagnac', 9, [['Rémy Martin Louis XIII', '4 500 000'], ['Hennessy XO', '310 000'], ['Hennessy VSOP', '100 000']]),
+          secB('Whiskies', 27, [['Johnnie Walker King George V', '850 000'], ['Hibiki', '300 000'], ['Macallan 12 years', '150 000']]),
+          secB('Tequila & mezcal', 9, [['Clase Azul Durango Mezcal', '1 250 000'], ['Don Julio 1942 Reposado', '375 000'], ['Patrón Silver', '75 000']]),
+          secB('Vodka, gin & rum', 14, [['Beluga Gold', '90 000'], ["Hendrick's", '55 000'], ['Havana Club Añejo', '32 000']]),
+          secB('Beers, shots & soft drinks', 34, [['Corona', '3 000'], ['Shots (Woo Woo, Blue Kamikaze…)', '5 000'], ['Fresh juice (glass)', '10 000']])
+        ]
+      }
+    };
+    const order = ['resto', 'lounge', 'vins', 'boissons'];
+    const tab = menus[this.state.tab] ? this.state.tab : 'resto';
+    const base = 'min-height: 46px; padding: 0 24px; border-radius: 999px; font-family: Jost, sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer; ';
+    const v = this.state.view;
+    const isCarte = v === 'carte', isLounge = v === 'lounge', isContact = v === 'contact';
+    const on = 'color: #efc688', off = 'color: #e9e2d4';
+    return {
+      isHome: v === 'home',
+      isCarte,
+      isLounge,
+      isContact,
+      navHome: v === 'home' ? on : off,
+      navCarte: isCarte ? on : off,
+      navLounge: isLounge ? on : off,
+      navContact: isContact ? on : off,
+      goHome: this.go('home'),
+      goCarte: this.go('carte'),
+      goLounge: this.go('lounge'),
+      goContact: this.go('contact'),
+      goReserve: this.go('home', 'reserver'),
+      noSubmit: (e) => { if (e && e.preventDefault) e.preventDefault(); },
+      loungeSlides: [
+        { src: '/_blob/36659d5ef402a15a3f5242b9d9f74fda', alt: 'Dancing night in the lounge, bar and bottles lit in green' },
+        { src: '/_blob/4f8d7f755db97ded9cb153d38a144249', alt: 'The rooftop full of guests under colourful lights' },
+        { src: '/_blob/061bab3416183922528ecaffb970a75b', alt: 'A bottle served with a sparkler' },
+        { src: '/_blob/1f84bcf49af4a53b6354047eb9e8f392', alt: 'A night on the rooftop, waiters in MIYU uniforms' }
+      ].map((sl, i) => {
+        const on = i === (this.state.slide || 0);
+        return {
+          ...sl,
+          label: 'Photo ' + (i + 1) + ' of 4',
+          pressed: on ? 'true' : 'false',
+          pick: () => this.setState({ slide: i }),
+          style: 'position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; transition: opacity 1.6s ease, transform 7s ease-out; opacity: ' + (on ? '1' : '0') + '; transform: scale(' + (on ? '1.06' : '1') + ')',
+          dot: 'width: ' + (on ? '34px' : '12px') + '; height: 12px; min-width: 12px; padding: 0; border-radius: 999px; border: 1px solid rgba(239,198,136,0.8); cursor: pointer; transition: width .4s ease, background .4s ease; background: ' + (on ? '#efc688' : 'transparent')
+        };
+      }),
+      tabs: order.map((k) => ({
+        label: menus[k].label,
+        sel: k === tab ? 'true' : 'false',
+        style: base + (k === tab ? 'background: #efc688; color: #022d33; border: 1px solid #efc688' : 'background: transparent; color: #efc688; border: 1px solid rgba(239,198,136,0.5)'),
+        select: () => this.setState({ tab: k })
+      })),
+      menu: menus[tab],
+      showPrestige: tab === 'boissons',
+      prestige: [
+        { n: 'Rémy Martin Louis XIII', p: '4 500 000 M', img: '/_blob/d9b7de0bcb1410818fd44a573469f113' },
+        { n: 'Hennessy Paradis', p: '2 300 000 M', img: '/_blob/d1c585b9af7ad406fb1376804e2cc8ca' },
+        { n: 'Clase Azul Durango', p: '1 250 000 M', img: '/_blob/53f6fa9f37c26b71e351b075ded23a2d' },
+        { n: 'JW King George V', p: '850 000 M', img: '/_blob/1f45361ff3bc7666efa25ffc4b45b719' },
+        { n: 'Armand de Brignac', p: '680 000 M', img: '/_blob/fa6ce83799f7d86282f7d727cfe4b75e' },
+        { n: 'Clase Azul Reposado', p: '450 000 M', img: '/_blob/af08b221dc04912bc05fc53116382edf' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

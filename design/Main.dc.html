@@ -62,7 +62,10 @@ input:focus,select:focus{outline:2px solid #efc688;outline-offset:2px}
 <a href="#top" onClick="{{ goLounge }}" style="{{ navLounge }}">Lounge &amp; Rooftop</a>
 <a href="#top" onClick="{{ goContact }}" style="{{ navContact }}">Contact</a>
 </nav>
+<div style="display: flex; align-items: center; gap: 12px">
+<a href="Main.en.dc.html" hreflang="en" aria-label="English version" style="display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 0 10px; box-sizing: border-box; font-size: 12px; font-weight: 600; letter-spacing: 0.16em; color: #efc688; border: 1px solid rgba(239,198,136,0.45); border-radius: 999px">EN</a>
 <a href="#top" onClick="{{ goReserve }}" class="btn-gold" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 26px; font-size: 13px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; border-radius: 999px">Réserver</a>
+</div>
 </div>
 </header>
 
@@ -104,7 +107,7 @@ input:focus,select:focus{outline:2px solid #efc688;outline-offset:2px}
 <div style="max-width: 1180px; margin: 0 auto; background: #f4ecdd; color: #022d33; border-radius: 22px; padding: 28px 32px; display: flex; flex-wrap: wrap; align-items: flex-end; gap: 18px 22px; box-shadow: 0 30px 60px rgba(0,0,0,0.35)">
 <div style="flex: 1 1 200px; min-width: 0">
 <h2 style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 30px; font-weight: 600; line-height: 1.05">Réserver une table</h2>
-<p style="margin: 6px 0 0; font-size: 13px; color: #3e5a5d">Confirmation par WhatsApp</p>
+<p style="margin: 6px 0 0; font-size: 13px; color: #3e5a5d">Confirmation par e-mail et WhatsApp</p>
 </div>
 <div style="flex: 1 1 180px; min-width: 0; display: flex; flex-direction: column; gap: 6px">
 <label for="r-nom" style="font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #3e5a5d">Nom</label>
@@ -133,7 +136,7 @@ input:focus,select:focus{outline:2px solid #efc688;outline-offset:2px}
 <div style="flex: 1 1 150px; min-width: 0; display: flex; flex-direction: column; gap: 6px">
 <label for="r-espace" style="font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #3e5a5d">Espace</label>
 <select id="r-espace" style="min-height: 48px; padding: 0 12px; border: 1px solid #c8b893; border-radius: 12px; background: #fffaf0; color: #022d33; font-size: 15px">
-<option>Restaurant</option><option>Lounge bar</option><option>Rooftop</option>
+<option value="Restaurant">Restaurant</option><option value="Salon privé">Salon privé</option>
 </select>
 </div>
 <button type="button" id="r-submit" data-resa="r" style="flex: 1 1 170px; min-height: 48px; border: 0; border-radius: 12px; background: #022d33; color: #efc688; font-family: Jost, sans-serif; font-size: 14px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer">Réserver</button>
@@ -537,7 +540,7 @@ input:focus,select:focus{outline:2px solid #efc688;outline-offset:2px}
 <div style="margin: 0; background: #f4ecdd; color: #022d33; border-radius: 22px; padding: 28px 32px; display: flex; flex-wrap: wrap; align-items: flex-end; gap: 18px 22px; box-shadow: 0 24px 50px rgba(0,0,0,0.3)">
 <div style="flex: 1 1 200px; min-width: 0">
 <h2 style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 30px; font-weight: 600; line-height: 1.05">Réserver une table</h2>
-<p style="margin: 6px 0 0; font-size: 13px; color: #3e5a5d">Confirmation par WhatsApp</p>
+<p style="margin: 6px 0 0; font-size: 13px; color: #3e5a5d">Confirmation par e-mail et WhatsApp</p>
 </div>
 <div style="flex: 1 1 180px; min-width: 0; display: flex; flex-direction: column; gap: 6px">
 <label for="c-nom" style="font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #3e5a5d">Nom</label>
@@ -566,7 +569,7 @@ input:focus,select:focus{outline:2px solid #efc688;outline-offset:2px}
 <div style="flex: 1 1 150px; min-width: 0; display: flex; flex-direction: column; gap: 6px">
 <label for="c-espace" style="font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #3e5a5d">Espace</label>
 <select id="c-espace" style="min-height: 48px; padding: 0 12px; border: 1px solid #c8b893; border-radius: 12px; background: #fffaf0; color: #022d33; font-size: 15px">
-<option>Restaurant</option><option>Lounge bar</option><option>Rooftop</option>
+<option value="Restaurant">Restaurant</option><option value="Salon privé">Salon privé</option>
 </select>
 </div>
 <button type="button" id="c-submit" data-resa="c" style="flex: 1 1 170px; min-height: 48px; border: 0; border-radius: 12px; background: #022d33; color: #efc688; font-family: Jost, sans-serif; font-size: 14px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer">Réserver</button>
