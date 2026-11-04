@@ -96,10 +96,7 @@
  "Avenue François Charles, Centre-ville": "Avenue François Charles, City centre",
  "Réf. : Nouveau bâtiment SNPC, Pointe-Noire": "Ref.: New SNPC building, Pointe-Noire",
  "Horaires": "Opening hours",
- "Restaurant : [HORAIRES]": "Restaurant: [HOURS]",
- "Lounge &amp; rooftop : [HORAIRES]": "Lounge &amp; rooftop: [HOURS]",
  "Réservations": "Bookings",
- "[EMAIL] · [INSTAGRAM]": "[EMAIL] · [INSTAGRAM]",
  "Nos menus": "Our menus",
  "Un aperçu de chaque rubrique. Ouvrez le menu complet en PDF pour découvrir toute la sélection.": "A preview of each section. Open the full PDF menu to discover the whole selection.",
  "Collection prestige": "Prestige collection",
@@ -134,9 +131,7 @@
  "Message": "Message",
  "Envoyer le message": "Send message",
  "Téléphone &amp; WhatsApp": "Phone &amp; WhatsApp",
- "[EMAIL]": "[EMAIL]",
  "Réseaux sociaux": "Social media",
- "[INSTAGRAM] · [FACEBOOK]": "[INSTAGRAM] · [FACEBOOK]",
  "Restaurant &amp; Lounge Bar · Pointe-Noire, République du Congo": "Restaurant &amp; Lounge Bar · Pointe-Noire, Republic of the Congo",
  "© 2026 MIYU": "© 2026 MIYU",
  "MIYU, retour à l'accueil": "MIYU, back to home",
@@ -309,5 +304,10 @@
  "450 000 M": "450 000 M",
  "EN": "FR",
  "English version": "Version française",
- "Confirmation par e-mail et WhatsApp": "Confirmation by email and WhatsApp"
+ "Confirmation par e-mail et WhatsApp": "Confirmation by email and WhatsApp",
+ "Restaurant : 12h00 – 23h00": "Restaurant: 12 pm – 11 pm",
+ "Lounge : 18h00 – jusqu'à la fermeture": "Lounge: 6 pm – until closing",
+ "miyu@khospitality.net": "miyu@khospitality.net",
+ "Instagram de MIYU": "MIYU on Instagram",
+ "Facebook de MIYU": "MIYU on Facebook"
 }
