@@ -6,13 +6,13 @@
   var LANG = (document.documentElement.lang || "").slice(0, 2) === "en" || /^\/en(\/|$)/.test(location.pathname) ? "en" : "fr";
   var HEURES = ["12:00", "12:30", "13:00", "13:30", "14:00", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30"];
   var PERSONNES = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "12", "15", "20+"];
-  var ESPACES = ["Restaurant", "Salon privé"]; // valeurs envoyées au serveur
+  var ESPACES = ["Table restaurant", "Salon privé 1", "Salon privé 2"]; // valeurs envoyées au serveur
   var PHONE = "+242 05 773 9999";
   var T = {
     fr: {
       title: "Réserver une table", kicker: "MIYU · Pointe-Noire", close: "Fermer",
       nom: "Nom", tel: "Téléphone (WhatsApp)", email: "E-mail", emailHint: "(pour la confirmation)",
-      date: "Date", heure: "Heure", pers: "Personnes", espace: "Espace", espaces: ["Restaurant", "Salon privé"],
+      date: "Date", heure: "Heure", pers: "Personnes", espace: "Espace", espaces: ["Table restaurant", "Salon privé 1", "Salon privé 2"],
       msg: "Demande particulière", opt: "(facultatif)", msgPh: "Anniversaire, allergie, table près de la fenêtre…",
       send: "Envoyer la demande", sending: "Envoi en cours…",
       note: "Vous recevez une confirmation par e-mail. Notre équipe vous confirme la table par WhatsApp ou par téléphone.",
@@ -32,7 +32,7 @@
     en: {
       title: "Book a table", kicker: "MIYU · Pointe-Noire", close: "Close",
       nom: "Name", tel: "Phone (WhatsApp)", email: "Email", emailHint: "(for your confirmation)",
-      date: "Date", heure: "Time", pers: "Guests", espace: "Area", espaces: ["Restaurant", "Private lounge"],
+      date: "Date", heure: "Time", pers: "Guests", espace: "Area", espaces: ["Restaurant table", "Private lounge 1", "Private lounge 2"],
       msg: "Special request", opt: "(optional)", msgPh: "Birthday, allergy, table by the window…",
       send: "Send request", sending: "Sending…",
       note: "You will receive a confirmation by email. Our team will confirm your table by WhatsApp or phone.",
@@ -115,7 +115,7 @@
       '<div class="f"><label for="mr-date">' + T.date + '</label><input id="mr-date" name="date" type="date" required></div>' +
       '<div class="f"><label for="mr-heure">' + T.heure + '</label><select id="mr-heure" name="heure">' + opts(HEURES, "20:00") + "</select></div>" +
       '<div class="f"><label for="mr-pers">' + T.pers + '</label><select id="mr-pers" name="personnes">' + opts(PERSONNES, "2") + "</select></div>" +
-      '<div class="f"><label for="mr-espace">' + T.espace + '</label><select id="mr-espace" name="espace">' + opts(ESPACES, "Restaurant", T.espaces) + "</select></div>" +
+      '<div class="f"><label for="mr-espace">' + T.espace + '</label><select id="mr-espace" name="espace">' + opts(ESPACES, "Table restaurant", T.espaces) + "</select></div>" +
       '<div class="f full"><label for="mr-msg">' + T.msg + ' <span class="opt">' + T.opt + "</span></label>" +
       '<textarea id="mr-msg" name="message" maxlength="500" placeholder="' + T.msgPh + '"></textarea></div>' +
       '<div class="hp" aria-hidden="true"><label for="mr-site">Site</label><input id="mr-site" name="site" tabindex="-1" autocomplete="off"></div>' +

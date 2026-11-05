@@ -3,7 +3,7 @@ import assert from "node:assert/strict"
 import { handleReservation, validate, buildEmail, buildConfirmation, frDateLong } from "../lib/reservation.mjs"
 
 const tomorrow = new Date(Date.now() + 86400e3).toISOString().slice(0, 10)
-const ok = { nom: "Jean Test", tel: "+242 06 000 0000", email: "jean@example.com", date: tomorrow, heure: "20:00", personnes: "2", espace: "Salon privé", message: "Anniversaire" }
+const ok = { nom: "Jean Test", tel: "+242 06 000 0000", email: "jean@example.com", date: tomorrow, heure: "20:00", personnes: "2", espace: "Salon privé 1", message: "Anniversaire" }
 const mail = { RESEND_API_KEY: "re_x", MAIL_TO: "miyu@example.com" }
 const wa = { WHATSAPP_TOKEN: "t", WHATSAPP_PHONE_NUMBER_ID: "123", WHATSAPP_TO: "+243 829 793 378" }
 const mockFetch = (statusFor = () => 200) => {
@@ -59,6 +59,9 @@ test("refuse les données invalides", () => {
   assert.ok(validate({ ...ok, espace: "Cave" }).error)
   assert.ok(validate({ ...ok, email: "" }).error)
   assert.ok(validate({ ...ok, espace: "Rooftop" }).error)
+  assert.ok(validate({ ...ok, espace: "Salon privé" }).error)
+  assert.ok(validate({ ...ok, espace: "Salon privé 2" }).resa)
+  assert.ok(validate({ ...ok, espace: "Table restaurant" }).resa)
   assert.ok(validate({ ...ok, personnes: "20+" }).resa)
 })
 
@@ -83,7 +86,7 @@ test("confirmation au client, en français et en anglais", async () => {
   assert.match(c.text, /Bonjour Jean/)
   const en = buildConfirmation({ ...validate({ ...ok, lang: "en" }).resa }, { from: "x", replyTo: "y" })
   assert.match(en.subject, /we have received/)
-  assert.match(en.text, /Private lounge/)
+  assert.match(en.text, /Private lounge 1/)
   assert.match(en.text, /2 guests/)
 })
 
