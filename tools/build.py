@@ -30,6 +30,9 @@ DESIGN_EN = ROOT / "design" / "Main.en.dc.html"
 EN_JSON = ROOT / "design" / "i18n" / "en.json"
 ASSETS = ROOT / "design" / "assets"
 PUBLIC = ROOT / "public"
+# Mise en page mobile : sans cette balise, les téléphones affichent la page bureau réduite (≈ 980 px)
+# et les règles @media (max-width:720px) de la source ne s'appliquent jamais.
+VIEWPORT = '<meta name="viewport" content="width=device-width, initial-scale=1">'
 SITE = "https://miyurestaurant.com"
 
 if "--refresh-shell" in sys.argv:
@@ -84,7 +87,7 @@ def build_page(src, lang, used):
     head = old_tpl[: old_tpl.index("</style>", h) + len("</style>")] + "\n"
     meta = META[lang]
     alt = (
-        f'<meta name="description" content="{meta["description"]}">'
+        f'{VIEWPORT}<meta name="description" content="{meta["description"]}">'
         f'<link rel="alternate" hreflang="fr" href="{SITE}/"><link rel="alternate" hreflang="en" href="{SITE}/en/">'
         f'<link rel="alternate" hreflang="x-default" href="{SITE}/">'
     )
@@ -123,7 +126,7 @@ def build_page(src, lang, used):
 
     # Coque : langue, titre, fond sombre pendant le chargement, sans les ajouts du site d'aperçu Netlify.
     html = html.replace("<html>", f'<html lang="{lang}">', 1)
-    html = re.sub(r"<title>[^<]*</title>", f"<title>{meta['title']}</title>", html, count=1)
+    html = re.sub(r"<title>[^<]*</title>", f"<title>{meta['title']}</title>{VIEWPORT}", html, count=1)
     html = html.replace("body { background: #faf9f5;", "body { background: #022d33;", 1)
     html = html.replace("#__bundler_thumbnail { position: fixed; inset: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #faf9f5;",
                         "#__bundler_thumbnail { position: fixed; inset: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #022d33;", 1)
