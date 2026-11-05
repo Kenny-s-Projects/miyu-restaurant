@@ -43,6 +43,33 @@ input:focus,select:focus{outline:2px solid #efc688;outline-offset:2px}
 .zoom img{transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
 .zoom:hover img{transform:scale(1.06)}
 @supports (animation-timeline: view()){.rv{animation:rvIn linear both;animation-timeline:view();animation-range:entry 0% cover 25%}}
+.m-only{display:none}
+@media (max-width:720px){
+[style*="font-size: 11px"]{font-size:12px!important}
+[style*="font-size: 12px"]{font-size:13px!important}
+[style*="font-size: 13px"]{font-size:14px!important}
+[style*="font-size: 14px"]{font-size:15px!important}
+.m-hdr{padding:12px 18px!important;gap:12px!important}
+.m-hdr .gold{font-size:19px!important}
+.m-nav{order:3;flex:1 1 100%;flex-wrap:nowrap!important;justify-content:space-between;overflow-x:auto;gap:12px!important;font-size:12px!important;letter-spacing:0.06em!important;white-space:nowrap;scrollbar-width:none;padding:4px 0}
+.m-nav::-webkit-scrollbar{display:none}
+.m-car{display:flex!important;grid-template-columns:none!important;align-items:stretch!important;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px!important;margin:0 -24px;padding:0 24px 8px;scroll-padding:0 24px;scrollbar-width:none;flex:1 1 100%!important}
+.m-car::-webkit-scrollbar{display:none}
+.m-car>*{flex:0 0 84%!important;min-width:0;scroll-snap-align:start;margin-top:0!important}
+.m-car>.m-col{display:contents!important}
+.m-car .m-h{height:440px!important;flex:0 0 84%!important;scroll-snap-align:start}
+.m-hide{display:none!important}
+.m-only{display:block}
+.m-poster{height:auto!important;aspect-ratio:4/5}
+.m-wide{height:auto!important;aspect-ratio:3/2;flex-basis:100%!important}
+.m-stack{grid-template-columns:1fr!important;gap:0!important}
+.m-stack>div{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:14px 0!important;border-bottom:1px solid rgba(239,198,136,0.14)}
+.m-stack>div>p{margin:0!important}
+.m-card{padding:22px!important}
+.m-hero{padding:48px 24px 64px!important;gap:32px!important}
+.m-bottle{height:auto!important;aspect-ratio:482/850}
+.lift:hover{transform:none}
+}
 @media (prefers-reduced-motion:reduce){.lr-reveal,.lr-up,.lr-line,.lr-glow,.pg-in,.hd-in,.arch-in,.arch-in2,.rv{animation:none}.lift,.zoom img{transition:none}}
 </style>
 </helmet>
@@ -51,12 +78,12 @@ input:focus,select:focus{outline:2px solid #efc688;outline-offset:2px}
 
 <!-- EN-TÊTE -->
 <header id="top" class="hd-in" style="position: relative; z-index: 2; border-bottom: 1px solid rgba(239,198,136,0.18)">
-<div style="max-width: 1240px; margin: 0 auto; padding: 18px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px">
+<div class="m-hdr" style="max-width: 1240px; margin: 0 auto; padding: 18px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px">
 <a href="#top" onClick="{{ goHome }}" aria-label="MIYU, retour à l'accueil" style="display: flex; align-items: center; gap: 14px">
 <img src="/_blob/2dd3c79c35cd1cf27716ffb6ceb93067" alt="" style="width: 34px; height: 50px; object-fit: cover">
 <span class="gold" style="font-size: 22px; letter-spacing: 0.42em; font-weight: 500">MÌYǓ</span>
 </a>
-<nav aria-label="Navigation principale" style="display: flex; flex-wrap: wrap; gap: 6px 30px; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase">
+<nav aria-label="Navigation principale" class="m-nav" style="display: flex; flex-wrap: wrap; gap: 6px 30px; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase">
 <a href="#top" onClick="{{ goHome }}" style="{{ navHome }}">Accueil</a>
 <a href="#top" onClick="{{ goCarte }}" style="{{ navCarte }}">La carte</a>
 <a href="#top" onClick="{{ goLounge }}" style="{{ navLounge }}">Lounge &amp; Rooftop</a>
@@ -75,7 +102,7 @@ input:focus,select:focus{outline:2px solid #efc688;outline-offset:2px}
 
 <!-- HÉRO -->
 <section id="accueil" class="arches" style="position: relative">
-<div style="max-width: 1240px; margin: 0 auto; padding: 72px 24px 96px; display: flex; flex-wrap: wrap; align-items: center; gap: 56px">
+<div class="m-hero" style="max-width: 1240px; margin: 0 auto; padding: 72px 24px 96px; display: flex; flex-wrap: wrap; align-items: center; gap: 56px">
 <div style="flex: 1 1 460px; min-width: 0; display: flex; flex-direction: column; gap: 26px">
 <p class="lr-up lr-d1" style="margin: 0; font-size: 13px; letter-spacing: 0.32em; text-transform: uppercase; color: #efc688">Restaurant · Lounge bar · Rooftop</p>
 <h1 class="lr-up lr-d2" style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: clamp(48px, 6.4vw, 92px); line-height: 0.98; color: #f4ecdd">L'art japonais,<br><span class="gold" style="font-style: italic">au cœur</span> de Pointe-Noire</h1>
@@ -85,19 +112,24 @@ input:focus,select:focus{outline:2px solid #efc688;outline-offset:2px}
 <a href="#top" onClick="{{ goCarte }}" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 30px; font-size: 14px; letter-spacing: 0.14em; text-transform: uppercase; border-radius: 999px; border: 1px solid rgba(239,198,136,0.55)">Découvrir la carte</a>
 </div>
 </div>
-<div style="flex: 1 1 420px; min-width: 0; position: relative; display: flex; gap: 18px; align-items: flex-end">
-<div class="arch-in" style="flex: 1.25 1 0; min-width: 0; border-radius: 220px 220px 18px 18px; overflow: hidden; border: 1px solid rgba(239,198,136,0.45); height: 560px">
+<div class="m-car" style="flex: 1 1 420px; min-width: 0; position: relative; display: flex; gap: 18px; align-items: flex-end">
+<div class="arch-in m-h" style="flex: 1.25 1 0; min-width: 0; border-radius: 220px 220px 18px 18px; overflow: hidden; border: 1px solid rgba(239,198,136,0.45); height: 560px">
 <img src="/_blob/a37e870c8d07976f85ac8eb7729f98ca" alt="Makis au saumon garnis d'œufs de poisson" style="width: 100%; height: 100%; object-fit: cover; display: block">
 </div>
-<div class="arch-in2" style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 18px">
-<div style="border-radius: 18px; overflow: hidden; height: 300px; border: 1px solid rgba(239,198,136,0.25)">
+<div class="arch-in2 m-col" style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 18px">
+<div class="m-h" style="border-radius: 18px; overflow: hidden; height: 300px; border: 1px solid rgba(239,198,136,0.25)">
 <img src="/_blob/48b811b402ecee31bee493f0ceda61ad" alt="Grand plateau de sushis, nigiris et makis" style="width: 100%; height: 100%; object-fit: cover; display: block">
 </div>
-<div style="border-radius: 18px; padding: 22px; background: rgba(239,198,136,0.08); border: 1px solid rgba(239,198,136,0.3)">
+<div class="m-hide" style="border-radius: 18px; padding: 22px; background: rgba(239,198,136,0.08); border: 1px solid rgba(239,198,136,0.3)">
 <p style="margin: 0 0 6px; font-family: Allura, cursive; font-size: 34px; line-height: 1" class="gold">Ce soir</p>
 <p style="margin: 0; font-size: 14px; line-height: 1.5; color: #c9d2cf">Réservations ouvertes pour la salle, le lounge et le rooftop.</p>
 </div>
 </div>
+</div>
+<!-- Mobile : carte « Ce soir » sous le carrousel (copie de celle du bloc photos, masquée sur mobile) -->
+<div class="m-only" style="border-radius: 18px; padding: 22px; flex: 1 1 100%; background: rgba(239,198,136,0.08); border: 1px solid rgba(239,198,136,0.3)">
+<p style="margin: 0 0 6px; font-family: Allura, cursive; font-size: 34px; line-height: 1" class="gold">Ce soir</p>
+<p style="margin: 0; font-size: 14px; line-height: 1.5; color: #c9d2cf">Réservations ouvertes pour la salle, le lounge et le rooftop.</p>
 </div>
 </div>
 </section>
@@ -146,11 +178,11 @@ input:focus,select:focus{outline:2px solid #efc688;outline-offset:2px}
 <!-- L'EXPÉRIENCE -->
 <section style="padding: 120px 24px 100px">
 <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 64px; align-items: center">
-<div style="flex: 1 1 440px; min-width: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px">
-<div class="zoom" style="height: 460px; border-radius: 18px; overflow: hidden">
+<div class="m-car" style="flex: 1 1 440px; min-width: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px">
+<div class="zoom m-h" style="height: 460px; border-radius: 18px; overflow: hidden">
 <img src="/_blob/09ef1e53ab8b9251075416d7427ba5b1" alt="Table dressée en marbre avec assiettes vertes et serviettes en lin" style="width: 100%; height: 100%; object-fit: cover; display: block">
 </div>
-<div class="zoom" style="height: 460px; border-radius: 18px; overflow: hidden; margin-top: 60px">
+<div class="zoom m-h" style="height: 460px; border-radius: 18px; overflow: hidden; margin-top: 60px">
 <img src="/_blob/82e9d89e84cf7fad05e7012f20272adf" alt="Comptoir d'accueil MIYU sous un lustre doré" style="width: 100%; height: 100%; object-fit: cover; display: block">
 </div>
 </div>
@@ -158,7 +190,7 @@ input:focus,select:focus{outline:2px solid #efc688;outline-offset:2px}
 <p style="margin: 0; font-family: Allura, cursive; font-size: 46px; line-height: 1" class="gold">Bienvenue</p>
 <h2 class="rv" style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: clamp(36px, 4vw, 56px); line-height: 1.05; color: #f4ecdd">Une maison élégante, pensée pour prendre le temps</h2>
 <p style="margin: 0; font-size: 17px; line-height: 1.75; font-weight: 300; color: #c9d2cf">Tables en marbre, lumière dorée, service attentionné : chez MIYU, chaque détail prépare la soirée. Le restaurant accueille vos déjeuners et dîners, le lounge bar vos apéritifs et le rooftop vos nuits les plus festives.</p>
-<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; padding-top: 12px; border-top: 1px solid rgba(239,198,136,0.22)">
+<div class="m-stack" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; padding-top: 12px; border-top: 1px solid rgba(239,198,136,0.22)">
 <div style="padding-top: 16px">
 <p style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 26px; color: #efc688">Restaurant</p>
 <p style="margin: 4px 0 0; font-size: 13px; color: #a9b8b6">Déjeuner &amp; dîner</p>
@@ -187,7 +219,7 @@ input:focus,select:focus{outline:2px solid #efc688;outline-offset:2px}
 <a href="#top" onClick="{{ goCarte }}" class="btn-gold" style="display: inline-flex; align-items: center; min-height: 50px; padding: 0 30px; font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; border-radius: 999px">Voir toute la carte</a>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 24px">
-<article class="rv lift" style="flex: 1 1 460px; min-width: 0; display: flex; flex-direction: column; gap: 22px; padding: 32px; border-radius: 22px; background: #022d33; border: 1px solid rgba(239,198,136,0.28)">
+<article class="rv lift m-card" style="flex: 1 1 460px; min-width: 0; display: flex; flex-direction: column; gap: 22px; padding: 32px; border-radius: 22px; background: #022d33; border: 1px solid rgba(239,198,136,0.28)">
 <div style="display: flex; align-items: center; gap: 18px">
 <div style="flex: 0 0 72px; height: 100px; border-radius: 8px; overflow: hidden; border: 1px solid rgba(239,198,136,0.35)"><img src="/_blob/38038a5a8985e78970873edd77d4a2c9" alt="Couverture du menu du restaurant" style="width: 100%; height: 100%; object-fit: cover; display: block"></div>
 <div><p style="margin: 0; font-family: Allura, cursive; font-size: 36px; line-height: 1" class="gold">Le menu</p><h3 style="margin: 4px 0 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 32px; font-weight: 600; color: #f4ecdd">Restaurant</h3></div>
@@ -219,7 +251,7 @@ input:focus,select:focus{outline:2px solid #efc688;outline-offset:2px}
 </div>
 <a href="https://drive.google.com/file/d/1xbgtYN97lkoP_aj9wT9NAZNdvsuSKZJa/view?usp=sharing" target="_blank" rel="noopener" style="align-self: flex-start; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; border-bottom: 1px solid rgba(239,198,136,0.5); padding-bottom: 3px">Menu complet (PDF) ↗</a>
 </article>
-<article class="rv lift" style="flex: 1 1 460px; min-width: 0; display: flex; flex-direction: column; gap: 22px; padding: 32px; border-radius: 22px; background: #022d33; border: 1px solid rgba(239,198,136,0.28)">
+<article class="rv lift m-card" style="flex: 1 1 460px; min-width: 0; display: flex; flex-direction: column; gap: 22px; padding: 32px; border-radius: 22px; background: #022d33; border: 1px solid rgba(239,198,136,0.28)">
 <div style="display: flex; align-items: center; gap: 18px">
 <div style="flex: 0 0 72px; height: 100px; border-radius: 8px; overflow: hidden; border: 1px solid rgba(239,198,136,0.35)"><img src="/_blob/40a7cc05f2ecb975357ea46cc22cd2c7" alt="Couverture de la carte des vins" style="width: 100%; height: 100%; object-fit: cover; display: block"></div>
 <div><p style="margin: 0; font-family: Allura, cursive; font-size: 36px; line-height: 1" class="gold">Sélection</p><h3 style="margin: 4px 0 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 32px; font-weight: 600; color: #f4ecdd">Carte des vins</h3></div>
@@ -264,9 +296,9 @@ input:focus,select:focus{outline:2px solid #efc688;outline-offset:2px}
 <h2 class="rv" style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: clamp(36px, 4vw, 56px); line-height: 1.05; color: #f4ecdd">Lounge &amp; Rooftop</h2>
 <p style="margin: 0; max-width: 560px; font-size: 16px; line-height: 1.6; color: #a9b8b6">Chaque semaine, une soirée à vivre. Réservations uniquement.</p>
 </div>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px">
+<div class="m-car" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px">
 <article class="rv lift" style="background: rgba(1,31,36,0.85); border: 1px solid rgba(239,198,136,0.28); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column">
-<div class="zoom" style="height: 330px; overflow: hidden">
+<div class="zoom m-poster" style="height: 330px; overflow: hidden">
 <img src="/_blob/df4cdd182d34881963f857372cddcb1f" alt="Affiche Wagyu &amp; Vin" style="width: 100%; height: 100%; object-fit: cover; object-position: top; display: block">
 </div>
 <div style="padding: 24px; display: flex; flex-direction: column; gap: 10px">
@@ -276,7 +308,7 @@ input:focus,select:focus{outline:2px solid #efc688;outline-offset:2px}
 </div>
 </article>
 <article class="rv lift" style="background: rgba(1,31,36,0.85); border: 1px solid rgba(239,198,136,0.28); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column">
-<div class="zoom" style="height: 330px; overflow: hidden">
+<div class="zoom m-poster" style="height: 330px; overflow: hidden">
 <img src="/_blob/f6fa67ebc528fd314bda967cddfb7ff2" alt="Affiche After Work Rooftop Party" style="width: 100%; height: 100%; object-fit: cover; object-position: top; display: block">
 </div>
 <div style="padding: 24px; display: flex; flex-direction: column; gap: 10px">
@@ -286,7 +318,7 @@ input:focus,select:focus{outline:2px solid #efc688;outline-offset:2px}
 </div>
 </article>
 <article class="rv lift" style="background: rgba(1,31,36,0.85); border: 1px solid rgba(239,198,136,0.28); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column">
-<div class="zoom" style="height: 330px; overflow: hidden">
+<div class="zoom m-poster" style="height: 330px; overflow: hidden">
 <img src="/_blob/262c490de58492f1f662ae18dc6b2b38" alt="Affiche Champagne Night Rooftop Vibes" style="width: 100%; height: 100%; object-fit: cover; object-position: top; display: block">
 </div>
 <div style="padding: 24px; display: flex; flex-direction: column; gap: 10px">
@@ -302,7 +334,7 @@ input:focus,select:focus{outline:2px solid #efc688;outline-offset:2px}
 <!-- LA BRIGADE -->
 <section style="padding: 100px 24px; background: #011f24">
 <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 56px; align-items: center">
-<div class="rv zoom" style="flex: 1.3 1 480px; min-width: 0; border-radius: 18px; overflow: hidden; border: 1px solid rgba(239,198,136,0.3); height: 460px">
+<div class="rv zoom m-wide" style="flex: 1.3 1 480px; min-width: 0; border-radius: 18px; overflow: hidden; border: 1px solid rgba(239,198,136,0.3); height: 460px">
 <img src="/_blob/b61a3450a8a8e4b07eaec2c6db0e074a" alt="La brigade de cuisine MIYU devant le logo lumineux" style="width: 100%; height: 100%; object-fit: cover; display: block">
 </div>
 <div style="flex: 1 1 360px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
@@ -399,7 +431,7 @@ input:focus,select:focus{outline:2px solid #efc688;outline-offset:2px}
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px">
 <sc-for list="{{ prestige }}" as="b" hint-placeholder-count="6">
 <div style="border-radius: 14px; overflow: hidden; background: #f9f5ec; color: #022d33">
-<img src="{{ b.img }}" alt="Bouteille {{ b.n }}" style="width: 100%; height: 190px; object-fit: cover; object-position: center 35%; display: block">
+<img src="{{ b.img }}" alt="Bouteille {{ b.n }}" class="m-bottle" style="width: 100%; height: 190px; object-fit: cover; object-position: center 35%; display: block">
 <div style="padding: 12px 14px">
 <p style="margin: 0; font-size: 13px; font-weight: 600; line-height: 1.3">{{ b.n }}</p>
 <p style="margin: 4px 0 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 19px; font-weight: 600">{{ b.p }}</p>
@@ -477,9 +509,9 @@ input:focus,select:focus{outline:2px solid #efc688;outline-offset:2px}
 <h2 class="rv" style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: clamp(36px, 4vw, 56px); line-height: 1.05; color: #f4ecdd">Chaque semaine, une soirée à vivre</h2>
 <p style="margin: 0; max-width: 560px; font-size: 16px; line-height: 1.6; color: #a9b8b6">Réservations uniquement.</p>
 </div>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px">
+<div class="m-car" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px">
 <article class="rv lift" style="background: #031417; border: 1px solid rgba(239,198,136,0.28); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column">
-<div class="zoom" style="height: 330px; overflow: hidden">
+<div class="zoom m-poster" style="height: 330px; overflow: hidden">
 <img src="/_blob/22062bce2b31d20681ea522d32b88162" alt="Affiche L’heure d’or, Happy Hour" style="width: 100%; height: 100%; object-fit: cover; object-position: top; display: block">
 </div>
 <div style="padding: 24px; display: flex; flex-direction: column; gap: 10px">
@@ -489,7 +521,7 @@ input:focus,select:focus{outline:2px solid #efc688;outline-offset:2px}
 </div>
 </article>
 <article class="rv lift" style="background: #031417; border: 1px solid rgba(239,198,136,0.28); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column">
-<div class="zoom" style="height: 330px; overflow: hidden">
+<div class="zoom m-poster" style="height: 330px; overflow: hidden">
 <img src="/_blob/df4cdd182d34881963f857372cddcb1f" alt="Affiche Wagyu &amp; Vin" style="width: 100%; height: 100%; object-fit: cover; object-position: top; display: block">
 </div>
 <div style="padding: 24px; display: flex; flex-direction: column; gap: 10px">
@@ -499,7 +531,7 @@ input:focus,select:focus{outline:2px solid #efc688;outline-offset:2px}
 </div>
 </article>
 <article class="rv lift" style="background: #031417; border: 1px solid rgba(239,198,136,0.28); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column">
-<div class="zoom" style="height: 330px; overflow: hidden">
+<div class="zoom m-poster" style="height: 330px; overflow: hidden">
 <img src="/_blob/f6fa67ebc528fd314bda967cddfb7ff2" alt="Affiche After Work Rooftop Party" style="width: 100%; height: 100%; object-fit: cover; object-position: top; display: block">
 </div>
 <div style="padding: 24px; display: flex; flex-direction: column; gap: 10px">
@@ -509,7 +541,7 @@ input:focus,select:focus{outline:2px solid #efc688;outline-offset:2px}
 </div>
 </article>
 <article class="rv lift" style="background: #031417; border: 1px solid rgba(239,198,136,0.28); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column">
-<div class="zoom" style="height: 330px; overflow: hidden">
+<div class="zoom m-poster" style="height: 330px; overflow: hidden">
 <img src="/_blob/262c490de58492f1f662ae18dc6b2b38" alt="Affiche Champagne Night Rooftop Vibes" style="width: 100%; height: 100%; object-fit: cover; object-position: top; display: block">
 </div>
 <div style="padding: 24px; display: flex; flex-direction: column; gap: 10px">
