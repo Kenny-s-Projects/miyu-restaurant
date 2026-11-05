@@ -56,6 +56,12 @@ const server = createServer(async (req, res) => {
 
   if (url.pathname === "/healthz") return sendJson(res, 200, { ok: true })
 
+  // Certains navigateurs et robots demandent /favicon.ico sans lire la page.
+  if (url.pathname === "/favicon.ico") {
+    res.writeHead(301, { Location: "/assets/favicon-32.png", ...SECURITY_HEADERS })
+    return res.end()
+  }
+
   // Images du site (public/assets) : noms simples uniquement, pas de sous-dossier.
   const asset = /^\/assets\/([a-z0-9][a-z0-9._-]{0,80}\.(?:jpe?g|webp|png|svg))$/i.exec(url.pathname)
   if (asset && (req.method === "GET" || req.method === "HEAD")) {

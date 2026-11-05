@@ -34,6 +34,31 @@ PUBLIC = ROOT / "public"
 # et les règles @media (max-width:720px) de la source ne s'appliquent jamais.
 VIEWPORT = '<meta name="viewport" content="width=device-width, initial-scale=1">'
 SITE = "https://miyurestaurant.com"
+# Favicon et aperçu des liens (WhatsApp, Facebook…), générés par tools/icons.py à partir du monogramme.
+ICONS = ["favicon-32.png", "favicon-192.png", "apple-touch-icon.png", "apercu-lien.jpg"]
+
+
+def head_tags(lang, meta):
+    """Balises de favicon et d'aperçu des liens (Open Graph). Les URL d'image doivent être absolues."""
+    url = f"{SITE}/" if lang == "fr" else f"{SITE}/en/"
+    esc = lambda t: t.replace("&", "&amp;").replace('"', "&quot;")
+    return (
+        '<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">'
+        '<link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192.png">'
+        '<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">'
+        '<meta name="theme-color" content="#022d33">'
+        '<meta property="og:type" content="website">'
+        '<meta property="og:site_name" content="MIYU">'
+        f'<meta property="og:locale" content="{"fr_FR" if lang == "fr" else "en_US"}">'
+        f'<meta property="og:url" content="{url}">'
+        f'<meta property="og:title" content="{esc(meta["title"])}">'
+        f'<meta property="og:description" content="{esc(meta["description"])}">'
+        f'<meta property="og:image" content="{SITE}/assets/apercu-lien.jpg">'
+        '<meta property="og:image:type" content="image/jpeg">'
+        '<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">'
+        '<meta property="og:image:alt" content="Monogramme doré MIYU sur fond vert">'
+        '<meta name="twitter:card" content="summary_large_image">'
+    )
 
 if "--refresh-shell" in sys.argv:
     with urllib.request.urlopen(PREVIEW) as r:
@@ -87,7 +112,7 @@ def build_page(src, lang, used):
     head = old_tpl[: old_tpl.index("</style>", h) + len("</style>")] + "\n"
     meta = META[lang]
     alt = (
-        f'{VIEWPORT}<meta name="description" content="{meta["description"]}">'
+        f'{VIEWPORT}{head_tags(lang, meta)}<meta name="description" content="{meta["description"]}">'
         f'<link rel="alternate" hreflang="fr" href="{SITE}/"><link rel="alternate" hreflang="en" href="{SITE}/en/">'
         f'<link rel="alternate" hreflang="x-default" href="{SITE}/">'
     )
@@ -126,7 +151,7 @@ def build_page(src, lang, used):
 
     # Coque : langue, titre, fond sombre pendant le chargement, sans les ajouts du site d'aperçu Netlify.
     html = html.replace("<html>", f'<html lang="{lang}">', 1)
-    html = re.sub(r"<title>[^<]*</title>", f"<title>{meta['title']}</title>{VIEWPORT}", html, count=1)
+    html = re.sub(r"<title>[^<]*</title>", f"<title>{meta['title']}</title>{VIEWPORT}{head_tags(lang, meta)}", html, count=1)
     html = html.replace("body { background: #faf9f5;", "body { background: #022d33;", 1)
     html = html.replace("#__bundler_thumbnail { position: fixed; inset: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #faf9f5;",
                         "#__bundler_thumbnail { position: fixed; inset: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #022d33;", 1)
@@ -152,6 +177,7 @@ pub_assets = PUBLIC / "assets"
 pub_assets.mkdir(parents=True, exist_ok=True)
 for old in pub_assets.iterdir():
     old.unlink()
+used.update(ICONS)
 for name in sorted(used):
     shutil.copy(ASSETS / name, pub_assets / name)
 
