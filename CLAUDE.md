@@ -46,6 +46,14 @@ npm test                    # tests de lib/reservation.mjs (lancés aussi par Re
 npm start                   # http://localhost:10000
 ```
 
+## Mot-clé « liboke »
+
+Quand le webmaster écrit **« liboke »**, cela veut dire « merge et déploie » (ou « commit, push et déploie ») :
+1. committer les modifications en cours et les pousser sur la branche de travail ;
+2. fusionner la branche dans `main` et pousser `main` ;
+3. déclencher le déploiement Render du service `srv-dbirbk0u01pc73docrf0`, puis vérifier
+   `https://miyurestaurant.com/healthz` et la page d'accueil (FR et EN).
+
 ## Modifier le site
 
 1. Modifier `design/Main.dc.html` (et le canevas si l'utilisateur s'en sert ; garder les deux identiques).
