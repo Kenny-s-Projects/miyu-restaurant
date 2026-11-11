@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- Page cachée : absente du menu et des liens du site, et non indexée par les moteurs de recherche. -->
+<meta name="robots" content="noindex, nofollow">
+<title>Galerie · MIYU</title>
+<link rel="icon" type="image/png" href="/assets/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Jost:wght@300;400;500&family=Allura&display=swap" rel="stylesheet">
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; min-height: 100vh; background: #022d33; color: #e9e2d4;
+    font-family: Jost, 'Avenir Next', 'Segoe UI', sans-serif; font-weight: 300;
+    padding: env(safe-area-inset-top, 0px) 0 env(safe-area-inset-bottom, 0px);
+  }
+  .gold { background: linear-gradient(100deg,#f6d9a4 0%,#efc688 35%,#b98a52 70%,#e8bf80 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  header { border-bottom: 1px solid rgba(239,198,136,0.18); }
+  .bar { max-width: 1240px; margin: 0 auto; padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .logo { text-decoration: none; font-size: 22px; letter-spacing: 0.42em; font-weight: 500; }
+  .back { color: #efc688; text-decoration: none; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; border: 1px solid rgba(239,198,136,0.45); border-radius: 999px; padding: 10px 18px; }
+  .back:hover { background: rgba(239,198,136,0.1); }
+  main { max-width: 1240px; margin: 0 auto; padding: 56px 24px 88px; }
+  .kicker { margin: 0; font-family: Allura, cursive; font-size: 48px; line-height: 1; text-align: center; }
+  h1 { margin: 6px 0 40px; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400; font-size: clamp(34px, 5vw, 52px); text-align: center; color: #f3ead8; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 480px), 1fr)); gap: 24px; justify-items: center; }
+  .grid a { display: block; width: 100%; max-width: 1005px; border-radius: 14px; overflow: hidden; border: 1px solid rgba(239,198,136,0.3); box-shadow: 0 24px 60px rgba(0,0,0,0.35); }
+  .grid img { display: block; width: 100%; height: auto; }
+  footer { text-align: center; padding: 0 24px 40px; font-size: 13px; color: #8fa5a1; }
+  @media (max-width: 720px) {
+    .bar { padding: 12px 18px; }
+    .logo { font-size: 19px; }
+    main { padding: 36px 16px 64px; }
+    .kicker { font-size: 40px; }
+    h1 { margin-bottom: 28px; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="bar">
+    <a class="logo gold" href="/" aria-label="MIYU, accueil">MÌYǓ</a>
+    <a class="back" href="/">Retour au site</a>
+  </div>
+</header>
+<main>
+  <p class="kicker gold">Galerie</p>
+  <h1>Nos visuels</h1>
+  <div class="grid">
+    <!-- Pour ajouter une image : la copier dans design/assets/ puis ajouter un bloc <a><img></a> ci-dessous. -->
+    <a href="/assets/galerie-coupon-retour.jpg" target="_blank" rel="noopener">
+      <img src="/assets/galerie-coupon-retour.jpg" width="1005" height="650"
+           alt="Coupon MIYU : -10 % sur l'addition totale au déjeuner et au dîner, plus une boisson de bienvenue offerte, les mardis, mercredis, jeudis et dimanches">
+    </a>
+  </div>
+</main>
+<footer>© 2026 MIYU · Restaurant &amp; Lounge Bar · Pointe-Noire</footer>
+</body>
+</html>

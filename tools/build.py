@@ -178,6 +178,14 @@ pub_assets.mkdir(parents=True, exist_ok=True)
 for old in pub_assets.iterdir():
     old.unlink()
 used.update(ICONS)
+
+# Page cachée /galerie/ (hors menu, non indexée) : page HTML simple, ses images viennent de design/assets.
+GALERIE = ROOT / "design" / "galerie.html"
+galerie_html = GALERIE.read_text(encoding="utf-8")
+(PUBLIC / "galerie").mkdir(parents=True, exist_ok=True)
+(PUBLIC / "galerie" / "index.html").write_text(galerie_html, encoding="utf-8")
+used.update(re.findall(r"/assets/([A-Za-z0-9._-]+)", galerie_html))
+
 for name in sorted(used):
     shutil.copy(ASSETS / name, pub_assets / name)
 

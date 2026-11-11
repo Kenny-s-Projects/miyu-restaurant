@@ -10,7 +10,12 @@ async function loadPage(file) {
   const raw = await readFile(new URL(file, import.meta.url))
   return { raw, gz: gzipSync(raw, { level: 9 }), br: brotliCompressSync(raw) }
 }
-const PAGES = { "/": await loadPage("./public/index.html"), "/en/": await loadPage("./public/en/index.html") }
+const PAGES = {
+  "/": await loadPage("./public/index.html"),
+  "/en/": await loadPage("./public/en/index.html"),
+  // Page cachée : absente du menu, non indexée (balise robots + en-tête X-Robots-Tag).
+  "/galerie/": await loadPage("./public/galerie/index.html"),
+}
 
 const ASSET_TYPES = { jpg: "image/jpeg", jpeg: "image/jpeg", webp: "image/webp", png: "image/png", svg: "image/svg+xml" }
 
@@ -86,7 +91,10 @@ const server = createServer(async (req, res) => {
   if (url.pathname === "/en" || url.pathname === "/en/index.html") {
     res.writeHead(301, { Location: "/en/" }); return res.end()
   }
-  const key = url.pathname === "/" || url.pathname === "/index.html" ? "/" : url.pathname === "/en/" ? "/en/" : null
+  if (url.pathname === "/galerie" || url.pathname === "/galerie/index.html") {
+    res.writeHead(301, { Location: "/galerie/" }); return res.end()
+  }
+  const key = url.pathname === "/" || url.pathname === "/index.html" ? "/" : Object.hasOwn(PAGES, url.pathname) ? url.pathname : null
   if (!key) {
     res.writeHead(302, { Location: url.pathname.startsWith("/en/") ? "/en/" : "/" }); return res.end()
   }
@@ -99,6 +107,7 @@ const server = createServer(async (req, res) => {
     "Cache-Control": "public, max-age=300",
     Vary: "Accept-Encoding",
     ...(enc ? { "Content-Encoding": enc } : {}),
+    ...(key === "/galerie/" ? { "X-Robots-Tag": "noindex, nofollow" } : {}),
     ...SECURITY_HEADERS,
   })
   res.end(req.method === "HEAD" ? undefined : buf)
