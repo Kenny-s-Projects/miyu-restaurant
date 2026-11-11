@@ -1,0 +1,18 @@
+# Netlify : publie tel quel le dossier public/ déjà construit par tools/build.py (aucune commande de build).
+# Le site principal reste servi par Render (server.mjs) ; sur Netlify il n'y a pas de serveur Node,
+# donc pas de POST /api/reservation ni de /healthz.
+
+[build]
+  publish = "public"
+  command = ""
+
+# Page cachée /galerie/ : non indexée par les moteurs de recherche (comme l'en-tête X-Robots-Tag de server.mjs).
+[[headers]]
+  for = "/galerie"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+[[headers]]
+  for = "/galerie/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
