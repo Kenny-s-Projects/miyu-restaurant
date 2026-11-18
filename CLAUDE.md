@@ -44,6 +44,7 @@ sauf s'il écrit en anglais. Les textes du site, les commentaires du code et les
 python3 -I tools/build.py   # reconstruit public/ (FR + EN) — à lancer après toute modification de design/ ou du client
 npm test                    # tests de lib/reservation.mjs (lancés aussi par Render au build)
 npm start                   # http://localhost:10000
+npm run demo                # test en local sans clé : rien n'est envoyé, les e-mails et WhatsApp s'affichent sur /demo/
 ```
 
 ## Mot-clé « liboke »
