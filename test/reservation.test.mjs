@@ -61,6 +61,7 @@ test("refuse les données invalides", () => {
   assert.ok(validate({ ...ok, espace: "Rooftop" }).error)
   assert.ok(validate({ ...ok, espace: "Salon privé" }).error)
   assert.ok(validate({ ...ok, espace: "Salon privé 2" }).resa)
+  assert.ok(validate({ ...ok, espace: "Rooftop Lounge Club" }).resa)
   assert.ok(validate({ ...ok, espace: "Table restaurant" }).resa)
   assert.ok(validate({ ...ok, personnes: "20+" }).resa)
 })

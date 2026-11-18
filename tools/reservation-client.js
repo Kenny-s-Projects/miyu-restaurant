@@ -6,14 +6,14 @@
   var LANG = (document.documentElement.lang || "").slice(0, 2) === "en" || /^\/en(\/|$)/.test(location.pathname) ? "en" : "fr";
   var HEURES = ["12:00", "12:30", "13:00", "13:30", "14:00", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30"];
   var PERSONNES = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "12", "15", "20+"];
-  var ESPACES = ["Table restaurant", "Salon privé 1", "Salon privé 2"]; // valeurs envoyées au serveur
+  var ESPACES = ["Table restaurant", "Salon privé 1", "Salon privé 2", "Rooftop Lounge Club"]; // valeurs envoyées au serveur
   var PHONE = "+242 05 773 9999";
   var WA_NOTIF = "243856486993"; // numéro WhatsApp qui reçoit la notification du bouton « WhatsApp » (+243 856 486 993)
   var T = {
     fr: {
       title: "Réserver une table", kicker: "MIYU · Pointe-Noire", close: "Fermer",
       nom: "Nom", tel: "Téléphone (WhatsApp)", email: "E-mail", emailHint: "(pour la confirmation)",
-      date: "Date", heure: "Heure", pers: "Personnes", espace: "Espace", espaces: ["Table restaurant", "Salon privé 1", "Salon privé 2"],
+      date: "Date", heure: "Heure", pers: "Personnes", espace: "Espace", espaces: ["Table restaurant", "Salon privé 1", "Salon privé 2", "Rooftop Lounge Club"],
       msg: "Demande particulière", opt: "(facultatif)", msgPh: "Anniversaire, allergie, table près de la fenêtre…",
       send: "Envoyer la demande", sending: "Envoi en cours…", wa: "Ouvrir WhatsApp", waHint: "Si WhatsApp ne s'est pas ouvert :", waOpening: "Ouverture de WhatsApp…",
       note: "Vous recevez une confirmation par e-mail. Notre équipe vous confirme la table par WhatsApp ou par téléphone.",
@@ -33,7 +33,7 @@
     en: {
       title: "Book a table", kicker: "MIYU · Pointe-Noire", close: "Close",
       nom: "Name", tel: "Phone (WhatsApp)", email: "Email", emailHint: "(for your confirmation)",
-      date: "Date", heure: "Time", pers: "Guests", espace: "Area", espaces: ["Restaurant table", "Private lounge 1", "Private lounge 2"],
+      date: "Date", heure: "Time", pers: "Guests", espace: "Area", espaces: ["Restaurant table", "Private lounge 1", "Private lounge 2", "Rooftop Lounge Club"],
       msg: "Special request", opt: "(optional)", msgPh: "Birthday, allergy, table by the window…",
       send: "Send request", sending: "Sending…", wa: "Open WhatsApp", waHint: "If WhatsApp did not open:", waOpening: "Opening WhatsApp…",
       note: "You will receive a confirmation by email. Our team will confirm your table by WhatsApp or phone.",
