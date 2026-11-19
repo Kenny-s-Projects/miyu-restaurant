@@ -91,6 +91,8 @@ Ne jamais écrire de secret dans le code ni dans la conversation : l'utilisateur
   au dépôt (GitHub › Kenny-s-Projects › Settings › GitHub Apps › Render).
 - Contenus à confirmer par MIYU : conditions de la **Ladies Night** (`[JOUR & CONDITIONS]`), mention « DJ sets »
   sur la page Lounge & Rooftop, écarts de prix entre les PDF (ex. Don Julio Reposado).
+- Page **Lounge & Rooftop** : **masquée** à la demande du client (lien « Lounge » du menu et bouton « Découvrir le lounge »
+  de l'accueil retirés, code de la vue conservé) ; pour la réactiver, remettre le lien laissé en commentaire dans la `<nav>`.
 - Barre de réservation sous le héros de l'accueil : **masquée** (`display: none` sur `#reserver`) à la demande
   du client ; à réactiver en retirant ce style.
 

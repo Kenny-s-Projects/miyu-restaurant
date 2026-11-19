@@ -86,7 +86,8 @@ input:focus,select:focus{outline:2px solid #efc688;outline-offset:2px}
 <nav aria-label="Navigation principale" class="m-nav" style="display: flex; flex-wrap: wrap; gap: 6px 30px; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase">
 <a href="#top" onClick="{{ goHome }}" style="{{ navHome }}">Accueil</a>
 <a href="#top" onClick="{{ goCarte }}" style="{{ navCarte }}">La carte</a>
-<a href="#top" onClick="{{ goLounge }}" style="{{ navLounge }}">Lounge</a>
+<!-- Page Lounge & Rooftop masquée à la demande du client ; pour la réactiver, remettre ici :
+<a href="#top" onClick="{{ goLounge }}" style="{{ navLounge }}">Lounge</a> -->
 <a href="#top" onClick="{{ goContact }}" style="{{ navContact }}">Contact</a>
 </nav>
 <div style="display: flex; align-items: center; gap: 12px">
@@ -318,9 +319,7 @@ input:focus,select:focus{outline:2px solid #efc688;outline-offset:2px}
 </div>
 </article>
 </div>
-<div style="display: flex; justify-content: center">
-<a href="#top" onClick="{{ goLounge }}" class="btn-gold" style="display: inline-flex; align-items: center; min-height: 50px; padding: 0 30px; font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; border-radius: 999px">Découvrir le lounge</a>
-</div>
+<!-- Bouton « Découvrir le lounge » retiré tant que la page Lounge & Rooftop est masquée. -->
 </div>
 </section>
 
