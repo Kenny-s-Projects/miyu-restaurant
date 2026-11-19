@@ -17,7 +17,7 @@ const DEMO_ENV = {
   MAIL_FROM: process.env.MAIL_FROM || "MIYU Réservations <reservations@miyurestaurant.com>",
   WHATSAPP_TOKEN: "demo",
   WHATSAPP_PHONE_NUMBER_ID: "demo",
-  WHATSAPP_TO: process.env.WHATSAPP_TO || "243856486993",
+  WHATSAPP_TO: process.env.WHATSAPP_TO || "242057739999",
 }
 async function demoFetch(url, init) {
   const payload = JSON.parse(init.body)

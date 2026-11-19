@@ -73,7 +73,7 @@ construit en JavaScript, icônes en SVG en ligne, animations dans le `<style>` d
 
 `RESEND_API_KEY` (secret), `MAIL_TO=miyu@khospitality.net`, `MAIL_FROM=MIYU Réservations <reservations@miyurestaurant.com>`,
 `WHATSAPP_TOKEN` (secret, token permanent d'un utilisateur système Meta), `WHATSAPP_PHONE_NUMBER_ID=1431382996729568`,
-`WHATSAPP_TO` (pour l'instant le numéro de test +243 856 486 993), `GRAPH_API_VERSION=v25.0`, `NODE_VERSION=22`.
+`WHATSAPP_TO` (pour l'instant le numéro de test +243 856 486 993 ; numéro du gérant : +242 05 773 9999, déjà utilisé par le bouton du site `WA_NOTIF`), `GRAPH_API_VERSION=v25.0`, `NODE_VERSION=22`.
 Optionnels : `WHATSAPP_TEMPLATE`, `WHATSAPP_TEMPLATE_LANG` (défaut `fr`).
 Ne jamais écrire de secret dans le code ni dans la conversation : l'utilisateur les colle lui-même dans Render.
 
