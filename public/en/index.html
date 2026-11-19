@@ -21,7 +21,7 @@
       nom: "Nom", tel: "Téléphone (WhatsApp)", email: "E-mail", emailHint: "(pour la confirmation)",
       date: "Date", heure: "Heure", pers: "Personnes", espace: "Espace", espaces: ["Table restaurant", "Salon privé 1", "Salon privé 2", "Rooftop Lounge Club"],
       msg: "Demande particulière", opt: "(facultatif)", msgPh: "Anniversaire, allergie, table près de la fenêtre…",
-      send: "Envoyer la demande", sending: "Envoi en cours…", wa: "Ouvrir WhatsApp", waHint: "Si WhatsApp ne s'est pas ouvert :", waOpening: "Ouverture de WhatsApp…",
+      send: "Envoyer la demande", sending: "Envoi en cours…", waOpening: "Ouverture de WhatsApp…",
       note: "Vous recevez une confirmation par e-mail. Notre équipe vous confirme la table par WhatsApp ou par téléphone.",
       thanks: "Merci !",
       done: function (d) {
@@ -41,7 +41,7 @@
       nom: "Name", tel: "Phone (WhatsApp)", email: "Email", emailHint: "(for your confirmation)",
       date: "Date", heure: "Time", pers: "Guests", espace: "Area", espaces: ["Restaurant table", "Private lounge 1", "Private lounge 2", "Rooftop Lounge Club"],
       msg: "Special request", opt: "(optional)", msgPh: "Birthday, allergy, table by the window…",
-      send: "Send request", sending: "Sending…", wa: "Open WhatsApp", waHint: "If WhatsApp did not open:", waOpening: "Opening WhatsApp…",
+      send: "Send request", sending: "Sending…", waOpening: "Opening WhatsApp…",
       note: "You will receive a confirmation by email. Our team will confirm your table by WhatsApp or phone.",
       thanks: "Thank you!",
       done: function (d) {
@@ -95,9 +95,6 @@
     "#miyu-resa .send{min-height:54px;border:0;border-radius:999px;cursor:pointer;font:600 14px Jost,sans-serif;letter-spacing:.14em;" +
     "text-transform:uppercase;color:#022d33;background:linear-gradient(100deg,#f3d39c,#efc688 45%,#c39457)}" +
     "#miyu-resa .send:disabled{opacity:.6;cursor:wait}" +
-    "#miyu-resa .wa{display:inline-flex;padding:0 28px;text-decoration:none;margin:0 auto 14px;align-items:center;justify-content:center;gap:10px;min-height:50px;border:0;border-radius:999px;cursor:pointer;" +
-    "font:600 13px Jost,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:#1f9d55}" +
-    "#miyu-resa [hidden]{display:none!important}#miyu-resa .wa-hint{margin:0 0 10px!important;font-size:13px!important}#miyu-resa .wa:hover{background:#178a49}#miyu-resa .wa svg{width:20px;height:20px;flex:0 0 20px}" +
     "#miyu-resa .msg{margin:0;font-size:14px;line-height:1.5;min-height:0}" +
     "#miyu-resa .msg.err{color:#8a1c1c}" +
     "#miyu-resa .note{margin:0;font-size:12px;color:#5b6d6e;text-align:center}" +
@@ -134,8 +131,6 @@
       '<p class="note full">' + T.note + "</p>" +
       "</form>" +
       '<div class="done" role="status"><h3>' + T.thanks + '</h3><p class="done-text"></p>' +
-      '<p class="wa-hint" hidden>' + T.waHint + '</p>' +
-      '<a class="wa" target="_blank" rel="noopener" hidden>' + '<svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>' + T.wa + "</a><br>" +
       '<button type="button" class="send ok" style="padding:0 34px">' + T.close + "</button></div>" +
       "</div>";
     document.body.appendChild(dlg);
@@ -218,8 +213,7 @@
 
     var wa = data.site ? null : window.open("", "_blank");
     if (wa) { try { wa.opener = null; wa.document.title = "WhatsApp"; wa.document.body.textContent = T.waOpening; } catch (x) {} }
-    var waUrl = waLink(data), waA = dlg.querySelector(".done .wa"), waP = dlg.querySelector(".wa-hint");
-    waA.hidden = waP.hidden = true;
+    var waUrl = waLink(data);
 
     busy = true;
     var btn = dlg.querySelector(".send");
@@ -231,7 +225,6 @@
           data.espaceLabel = T.espaces[ESPACES.indexOf(data.espace)] || data.espace;
           dlg.querySelector(".done-text").textContent = T.done(data);
           dlg.classList.add("sent");
-          waA.href = waUrl; waA.hidden = waP.hidden = false;
           if (wa && !wa.closed) wa.location.href = waUrl;
           dlg.querySelector(".ok").focus();
           d.message.value = "";
